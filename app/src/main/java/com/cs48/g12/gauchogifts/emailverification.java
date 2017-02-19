@@ -16,7 +16,11 @@ public class emailverification extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_emailverification);
+    }
 
-
+    public void verifLoginBtnClicked(View view) {
+        Intent loginIntent = new Intent(emailverification.this, login.class);
+        startActivity(loginIntent);
+        finish();
     }
 }

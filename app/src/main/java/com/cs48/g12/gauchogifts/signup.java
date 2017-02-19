@@ -166,9 +166,18 @@ public class signup extends AppCompatActivity {
             return;
         }
 
+        else if(!mEmail.getText().toString().trim().contains("umail.ucsb.edu")) {
+            Toast.makeText(signup.this, "Please enter a valid UCSB Umail.", Toast.LENGTH_LONG).show();
+            return;
+        }
+
         else if(TextUtils.isEmpty(mPassword.getText().toString().trim())) {
             Toast.makeText(signup.this, "Please enter your password.", Toast.LENGTH_LONG).show();
             return;
+        }
+
+        else if(mPassword.getText().toString().trim().length() < 6) {
+            Toast.makeText(signup.this, "Password must be at least 6 characters.", Toast.LENGTH_LONG).show();
         }
 
         else {

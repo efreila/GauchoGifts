@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -29,9 +30,9 @@ public class login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        txtEmailLogin = (EditText) findViewById(R.id.login_email);
-        txtPasswordLogin = (EditText) findViewById(R.id.login_password);
-        loginBtn = (Button) findViewById(R.id.login_login);
+        txtEmailLogin = (EditText)findViewById(R.id.login_email);
+        txtPasswordLogin = (EditText)findViewById(R.id.login_password);
+        loginBtn = (Button)findViewById(R.id.login_login);
         mAuth = FirebaseAuth.getInstance();
 
         loginBtn.setOnClickListener(new View.OnClickListener() {
@@ -44,18 +45,34 @@ public class login extends AppCompatActivity {
     }
 
     private void userLogin() {
-        mAuth.signInWithEmailAndPassword(txtEmailLogin.getText().toString().trim(), txtPasswordLogin.getText().toString().trim()).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if (!task.isSuccessful()) {
-                    Toast.makeText(login.this, "Wrong username/password", Toast.LENGTH_SHORT).show();
 
-                } else {
-                    checkIfEmailVerified();
+        if(TextUtils.isEmpty(txtEmailLogin.getText().toString().trim())) {
+            Toast.makeText(login.this, "Please enter your email.", Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        else if(TextUtils.isEmpty(txtPasswordLogin.getText().toString().trim())) {
+            Toast.makeText(login.this, "Please enter your password.", Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        else {
+
+            mAuth.signInWithEmailAndPassword(txtEmailLogin.getText().toString().trim(), txtPasswordLogin.getText().toString().trim()).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                    if (!task.isSuccessful()) {
+                        Toast.makeText(login.this, "Wrong username/password", Toast.LENGTH_SHORT).show();
+
+                    } else {
+                        checkIfEmailVerified();
+                    }
+                    // ...
                 }
-                // ...
-            }
-        });
+            });
+
+        }
+
     }
 
     private void checkIfEmailVerified() {
