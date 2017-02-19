@@ -15,12 +15,21 @@ public class intro extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_intro);
 
-        Button login = (Button)findViewById(R.id.logIn);
+        Button login = (Button)findViewById(R.id.intro_login);
         login.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 Intent myIntent = new Intent(view.getContext(), login.class);
                 startActivityForResult(myIntent, 0);
             }
         });
+
+        Button signup = (Button)findViewById(R.id.intro_signup);
+        signup.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                Intent myIntent1 = new Intent(view.getContext(), signup.class);
+                startActivityForResult(myIntent1, 0);
+            }
+        });
+
     }
 }
