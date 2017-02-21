@@ -106,11 +106,8 @@ public class profile extends AppCompatActivity {
         }
 */
 
-        //URL firstn = new URL("https://gauchogifts.firebaseio.com/Users/" + currentUid + "/First Name");
-
-
         String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        mRef = new Firebase("https://gauchogifts.firebaseio.com/Users/" + uid + "/First Name");
+        mRef = new Firebase("https://gauchogifts.firebaseio.com/Users/" + uid + "/User Info/First Name");
 
         mRef.addValueEventListener(new com.firebase.client.ValueEventListener() {
             @Override
@@ -126,7 +123,7 @@ public class profile extends AppCompatActivity {
             }
         });
 
-        mRef = new Firebase("https://gauchogifts.firebaseio.com/Users/" + uid + "/Last Name");
+        mRef = new Firebase("https://gauchogifts.firebaseio.com/Users/" + uid + "/User Info/Last Name");
 
         mRef.addValueEventListener(new com.firebase.client.ValueEventListener() {
             @Override
@@ -142,7 +139,7 @@ public class profile extends AppCompatActivity {
             }
         });
 
-        mRef = new Firebase("https://gauchogifts.firebaseio.com/Users/" + uid + "/Address Line One");
+        mRef = new Firebase("https://gauchogifts.firebaseio.com/Users/" + uid + "/User Info/Address Line One");
 
         mRef.addValueEventListener(new com.firebase.client.ValueEventListener() {
             @Override
@@ -158,7 +155,7 @@ public class profile extends AppCompatActivity {
             }
         });
 
-        mRef = new Firebase("https://gauchogifts.firebaseio.com/Users/" + uid + "/Address Line Two");
+        mRef = new Firebase("https://gauchogifts.firebaseio.com/Users/" + uid + "/User Info/Address Line Two");
 
         mRef.addValueEventListener(new com.firebase.client.ValueEventListener() {
             @Override
@@ -174,7 +171,7 @@ public class profile extends AppCompatActivity {
             }
         });
 
-        mRef = new Firebase("https://gauchogifts.firebaseio.com/Users/" + uid + "/City");
+        mRef = new Firebase("https://gauchogifts.firebaseio.com/Users/" + uid + "/User Info/City");
 
         mRef.addValueEventListener(new com.firebase.client.ValueEventListener() {
             @Override
@@ -190,7 +187,7 @@ public class profile extends AppCompatActivity {
             }
         });
 
-        mRef = new Firebase("https://gauchogifts.firebaseio.com/Users/" + uid + "/State");
+        mRef = new Firebase("https://gauchogifts.firebaseio.com/Users/" + uid + "/User Info/State");
 
         mRef.addValueEventListener(new com.firebase.client.ValueEventListener() {
             @Override
@@ -206,7 +203,7 @@ public class profile extends AppCompatActivity {
             }
         });
 
-        mRef = new Firebase("https://gauchogifts.firebaseio.com/Users/" + uid + "/ZIP");
+        mRef = new Firebase("https://gauchogifts.firebaseio.com/Users/" + uid + "/User Info/ZIP");
 
         mRef.addValueEventListener(new com.firebase.client.ValueEventListener() {
             @Override
