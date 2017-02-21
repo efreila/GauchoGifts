@@ -58,6 +58,8 @@ public class signup extends AppCompatActivity {
         mState = (EditText)findViewById(R.id.signup_state);
         mZIP = (EditText)findViewById(R.id.signup_zip);
         mCountry = (EditText)findViewById(R.id.signup_country);
+        FirebaseAuth.getInstance().signOut();
+
 
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -115,6 +117,7 @@ public class signup extends AppCompatActivity {
                         {
                             // email not sent, so display message and restart the activity or do whatever you wish to do
                             //restart this activity
+
                             overridePendingTransition(0, 0);
                             finish();
                             overridePendingTransition(0, 0);
@@ -200,10 +203,9 @@ public class signup extends AppCompatActivity {
                         myRef.child("Users").child(mAuth.getCurrentUser().getUid()).child("State").setValue(mState.getText().toString().trim());
                         myRef.child("Users").child(mAuth.getCurrentUser().getUid()).child("ZIP").setValue(mZIP.getText().toString().trim());
                         myRef.child("Users").child(mAuth.getCurrentUser().getUid()).child("Country").setValue(mCountry.getText().toString().trim());
-                        myRef.child("Users").child(mAuth.getCurrentUser().getUid()).child("Credits").setValue(0);
+                        myRef.child("Users").child(mAuth.getCurrentUser().getUid()).child("Credits").setValue(1);
 
                         mProgress.dismiss();
-
                         Toast.makeText(signup.this, "Successfully signed up...", Toast.LENGTH_LONG).show();
                     }
 
