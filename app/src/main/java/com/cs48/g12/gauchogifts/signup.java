@@ -195,15 +195,15 @@ public class signup extends AppCompatActivity {
                         FirebaseDatabase database = FirebaseDatabase.getInstance();
                         DatabaseReference myRef = database.getReference();
 
-                        myRef.child("Users").child(mAuth.getCurrentUser().getUid()).child("First Name").setValue(mFirstName.getText().toString().trim());
-                        myRef.child("Users").child(mAuth.getCurrentUser().getUid()).child("Last Name").setValue(mLastName.getText().toString().trim());
-                        myRef.child("Users").child(mAuth.getCurrentUser().getUid()).child("Address Line One").setValue(mAddressOne.getText().toString().trim());
-                        myRef.child("Users").child(mAuth.getCurrentUser().getUid()).child("Address Line Two").setValue(mAddressTwo.getText().toString().trim());
-                        myRef.child("Users").child(mAuth.getCurrentUser().getUid()).child("City").setValue(mCity.getText().toString().trim());
-                        myRef.child("Users").child(mAuth.getCurrentUser().getUid()).child("State").setValue(mState.getText().toString().trim());
-                        myRef.child("Users").child(mAuth.getCurrentUser().getUid()).child("ZIP").setValue(mZIP.getText().toString().trim());
-                        myRef.child("Users").child(mAuth.getCurrentUser().getUid()).child("Country").setValue(mCountry.getText().toString().trim());
-                        myRef.child("Users").child(mAuth.getCurrentUser().getUid()).child("Credits").setValue(1);
+                        myRef.child("Users").child(mAuth.getCurrentUser().getUid()).child("User Info").child("First Name").setValue(mFirstName.getText().toString().trim());
+                        myRef.child("Users").child(mAuth.getCurrentUser().getUid()).child("User Info").child("Last Name").setValue(mLastName.getText().toString().trim());
+                        myRef.child("Users").child(mAuth.getCurrentUser().getUid()).child("User Info").child("Address Line One").setValue(mAddressOne.getText().toString().trim());
+                        myRef.child("Users").child(mAuth.getCurrentUser().getUid()).child("User Info").child("Address Line Two").setValue(mAddressTwo.getText().toString().trim());
+                        myRef.child("Users").child(mAuth.getCurrentUser().getUid()).child("User Info").child("City").setValue(mCity.getText().toString().trim());
+                        myRef.child("Users").child(mAuth.getCurrentUser().getUid()).child("User Info").child("State").setValue(mState.getText().toString().trim());
+                        myRef.child("Users").child(mAuth.getCurrentUser().getUid()).child("User Info").child("ZIP").setValue(mZIP.getText().toString().trim());
+                        myRef.child("Users").child(mAuth.getCurrentUser().getUid()).child("User Info").child("Country").setValue(mCountry.getText().toString().trim());
+                        myRef.child("Users").child(mAuth.getCurrentUser().getUid()).child("User Info").child("Credits").setValue(1);
 
                         mProgress.dismiss();
                         Toast.makeText(signup.this, "Successfully signed up...", Toast.LENGTH_LONG).show();
