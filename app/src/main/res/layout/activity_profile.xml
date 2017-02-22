@@ -69,6 +69,25 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="text"
+                android:text="Credits:"
+                android:textSize="20dp"
+                android:ems="10"
+                android:id="@+id/credDisplay" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:text="Credits:"
+                android:textSize="20dp"
+                android:layout_marginLeft="50dp"
+                android:ems="10"
+                android:id="@+id/credits" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
                 android:text="Address:"
                 android:textSize="20dp"
                 android:ems="10"
@@ -118,6 +137,15 @@
                 android:id="@+id/Zip"
                 android:layout_marginLeft="50dp"
                 android:hint="Zip" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPostalAddress"
+                android:ems="10"
+                android:id="@+id/country"
+                android:layout_marginLeft="50dp"
+                android:hint="Country" />
 
             <TextView
                 android:text="Interests:"

@@ -35,7 +35,7 @@ public class profile extends AppCompatActivity {
 
     public static final int GET_PIC = 1;
     ImageButton userImageBtn;
-    TextView firstName, lastName, street1, street2, City, State, Zip;
+    TextView firstName, lastName, street1, street2, City, State, Zip, Credits, Country;
     TextView interestInput;
     private TextView saveText;
     private FirebaseAuth mAuth;
@@ -64,12 +64,14 @@ public class profile extends AppCompatActivity {
 
         firstName = (TextView) findViewById(R.id.profile_firstName);
         lastName = (TextView) findViewById(R.id.lastName);
+        Credits = (TextView) findViewById(R.id.credits);
         street1 = (TextView) findViewById(R.id.street1);
         street2 = (TextView) findViewById(R.id.street2);
         City = (TextView) findViewById(R.id.City);
         State = (TextView) findViewById(R.id.State);
         Zip = (TextView) findViewById(R.id.Zip);
         interestInput = (TextView) findViewById(R.id.interestInput);
+        Country = (TextView) findViewById(R.id.country);
 
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -131,6 +133,22 @@ public class profile extends AppCompatActivity {
                 String lastname = dataSnapshot.getValue(String.class);
 
                 lastName.setText(lastname);
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+
+            }
+        });
+
+        mRef = new Firebase("https://gauchogifts.firebaseio.com/Users/" + uid + "/User Info/Credits");
+
+        mRef.addValueEventListener(new com.firebase.client.ValueEventListener() {
+            @Override
+            public void onDataChange(com.firebase.client.DataSnapshot dataSnapshot) {
+                String credit = dataSnapshot.getValue(String.class);
+
+                Credits.setText(credit);
             }
 
             @Override
@@ -219,6 +237,21 @@ public class profile extends AppCompatActivity {
             }
         });
 
+        mRef = new Firebase("https://gauchogifts.firebaseio.com/Users/" + uid + "/User Info/Country");
+
+        mRef.addValueEventListener(new com.firebase.client.ValueEventListener() {
+            @Override
+            public void onDataChange(com.firebase.client.DataSnapshot dataSnapshot) {
+                String country = dataSnapshot.getValue(String.class);
+
+                Country.setText(country);
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+
+            }
+        });
 
         /*//when done button clicked goes to display profile class
         Button done = (Button) findViewById(R.id.donebtn);
