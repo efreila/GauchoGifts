@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "29210172806-hqlhhbbqjmv75c79l0lkf7achki48so5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.cs48.g12.gauchogifts",
+            "certificate_hash": "CE32420D4D88E0650BDEE48B4DCBCD71EB34BB64"
+          }
+        },
+        {
           "client_id": "29210172806-bklrdech0a9nub27g6kf4jg8g8c1p1ti.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -29,8 +37,13 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "29210172806-bklrdech0a9nub27g6kf4jg8g8c1p1ti.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         },
         "ads_service": {
           "status": 2

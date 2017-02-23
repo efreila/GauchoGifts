@@ -11,27 +11,27 @@
         android:text="Log In"
         android:layout_width="230dp"
         android:layout_height="wrap_content"
-        android:id="@+id/logIn"
+        android:id="@+id/intro_login"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/signUp"
+        app:layout_constraintBottom_toTopOf="@+id/intro_signup"
         android:layout_marginBottom="8dp" />
 
     <Button
         android:text="Sign Up"
         android:layout_width="230dp"
         android:layout_height="wrap_content"
-        android:id="@+id/signUp"
+        android:id="@+id/intro_signup"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/info"
+        app:layout_constraintBottom_toTopOf="@+id/intro_info"
         android:layout_marginBottom="8dp" />
 
     <Button
         android:text="terms of service"
         android:layout_width="230dp"
         android:layout_height="wrap_content"
-        android:id="@+id/info"
+        android:id="@+id/intro_info"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
