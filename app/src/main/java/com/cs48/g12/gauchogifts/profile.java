@@ -4,10 +4,12 @@ import android.Manifest;
 import android.content.pm.PackageManager;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.content.Intent;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -35,21 +37,54 @@ public class profile extends AppCompatActivity {
 
     public static final int GET_PIC = 1;
     ImageButton userImageBtn;
-    TextView firstName, lastName, street1, street2, City, State, Zip;
+    TextView firstName, lastName, street1, street2, City, State, Zip, Credits, Country;
     TextView interestInput;
     private TextView saveText;
     private FirebaseAuth mAuth;
     private Firebase mRef;
     private FirebaseAuth.AuthStateListener mAuthListener;
+    private BottomNavigationView bottomNavigationView;
 
     Button done;
-
-    String currentUid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+
+        //Navigation Bar
+        bottomNavigationView = (BottomNavigationView)findViewById(R.id.bottomNavigationView);
+        bottomNavigationView.getMenu().getItem(3).setChecked(true);
+        BottomNavigationViewHelper.disableShiftMode(bottomNavigationView);
+
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+                if (item.getItemId() == R.id.Home) {
+                    bottomNavigationView.getMenu().getItem(0).setChecked(true);
+                    Intent myIntent = new Intent(profile.this, home.class);
+                    startActivity(myIntent);
+                    finish();
+                } else if (item.getItemId() == R.id.AddGE) {
+                    bottomNavigationView.getMenu().getItem(1).setChecked(true);
+                    Intent myIntent = new Intent(profile.this, home.class);
+                    startActivity(myIntent);
+                    finish();
+                } else if (item.getItemId() == R.id.FAQ) {
+                    bottomNavigationView.getMenu().getItem(2).setChecked(true);
+                    Intent myIntent = new Intent(profile.this, home.class);
+                    startActivity(myIntent);
+                    finish();
+                } else if (item.getItemId() == R.id.Profile) {
+                    bottomNavigationView.getMenu().getItem(3).setChecked(true);
+                    Intent myIntent = new Intent(profile.this, profile.class);
+                    startActivity(myIntent);
+                    finish();
+                }
+                return false;
+            }
+        });
 
         mAuth = FirebaseAuth.getInstance();
         userImageBtn = (ImageButton) findViewById(R.id.userImage);
@@ -64,12 +99,14 @@ public class profile extends AppCompatActivity {
 
         firstName = (TextView) findViewById(R.id.profile_firstName);
         lastName = (TextView) findViewById(R.id.lastName);
+        Credits = (TextView) findViewById(R.id.credits);
         street1 = (TextView) findViewById(R.id.street1);
         street2 = (TextView) findViewById(R.id.street2);
         City = (TextView) findViewById(R.id.City);
         State = (TextView) findViewById(R.id.State);
         Zip = (TextView) findViewById(R.id.Zip);
         interestInput = (TextView) findViewById(R.id.interestInput);
+        Country = (TextView) findViewById(R.id.country);
 
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -131,6 +168,22 @@ public class profile extends AppCompatActivity {
                 String lastname = dataSnapshot.getValue(String.class);
 
                 lastName.setText(lastname);
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+
+            }
+        });
+
+        mRef = new Firebase("https://gauchogifts.firebaseio.com/Users/" + uid + "/User Info/Credits");
+
+        mRef.addValueEventListener(new com.firebase.client.ValueEventListener() {
+            @Override
+            public void onDataChange(com.firebase.client.DataSnapshot dataSnapshot) {
+                String credit = dataSnapshot.getValue(String.class);
+
+                Credits.setText(credit);
             }
 
             @Override
@@ -211,6 +264,22 @@ public class profile extends AppCompatActivity {
                 String zip = dataSnapshot.getValue(String.class);
 
                 Zip.setText(zip);
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+
+            }
+        });
+
+        mRef = new Firebase("https://gauchogifts.firebaseio.com/Users/" + uid + "/User Info/Country");
+
+        mRef.addValueEventListener(new com.firebase.client.ValueEventListener() {
+            @Override
+            public void onDataChange(com.firebase.client.DataSnapshot dataSnapshot) {
+                String country = dataSnapshot.getValue(String.class);
+
+                Country.setText(country);
             }
 
             @Override

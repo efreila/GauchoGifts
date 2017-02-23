@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:design="http://schemas.android.com/apk/res-auto"
     android:id="@+id/activity_profile"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -69,6 +70,25 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="text"
+                android:text="Credits:"
+                android:textSize="20dp"
+                android:ems="10"
+                android:id="@+id/credDisplay" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:text="Credits:"
+                android:textSize="20dp"
+                android:layout_marginLeft="50dp"
+                android:ems="10"
+                android:id="@+id/credits" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
                 android:text="Address:"
                 android:textSize="20dp"
                 android:ems="10"
@@ -120,6 +140,15 @@
                 android:hint="Zip" />
 
             <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPostalAddress"
+                android:ems="10"
+                android:id="@+id/country"
+                android:layout_marginLeft="50dp"
+                android:hint="Country" />
+
+            <TextView
                 android:text="Interests:"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -147,4 +176,24 @@
         </LinearLayout>
     </ScrollView>
 
-</RelativeLayout>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom">
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="4dp"
+            android:layout_gravity="top"
+            android:background="@drawable/shadow"
+            />
+
+        <android.support.design.widget.BottomNavigationView
+            android:id="@+id/bottomNavigationView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            design:menu="@menu/menu_navigation"
+            />
+    </FrameLayout>
+
+</android.support.design.widget.CoordinatorLayout>

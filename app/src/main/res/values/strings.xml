@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">GauchoGifts</string>
+    <string name="start">Start</string>
+    <string name="inicio">Inicio</string>
+    <string name="home">Home</string>
+    <string name="faq">FAQ</string>
+    <string name="profile">Profile</string>
+    <string name="add_ge">Add GE</string>
 </resources>
