@@ -24,7 +24,6 @@ public class login extends AppCompatActivity {
     private EditText txtEmailLogin;
     private EditText txtPasswordLogin;
     private Button loginBtn;
-    private Button resetPassBtn;
 
 
     @Override
@@ -35,7 +34,6 @@ public class login extends AppCompatActivity {
         txtEmailLogin = (EditText)findViewById(R.id.login_email);
         txtPasswordLogin = (EditText)findViewById(R.id.login_password);
         loginBtn = (Button)findViewById(R.id.login_login);
-        resetPassBtn = (Button)findViewById(R.id.login_resetpass);
         mAuth = FirebaseAuth.getInstance();
 
         loginBtn.setOnClickListener(new View.OnClickListener() {
@@ -44,6 +42,7 @@ public class login extends AppCompatActivity {
                 userLogin();
             }
         });
+
 
     }
 
