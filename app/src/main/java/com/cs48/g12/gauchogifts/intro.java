@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 public class intro extends AppCompatActivity {
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,4 +33,10 @@ public class intro extends AppCompatActivity {
         });
 
     }
+    protected void sendMessage(View v)
+    {
+        Intent intent = new Intent(getApplicationContext(), info.class);
+        startActivity(intent);
+    }
+
 }
