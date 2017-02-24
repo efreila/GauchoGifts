@@ -7,6 +7,7 @@ import android.util.Log;
 import java.lang.reflect.Field;
 
 //Code to fix bottom navigation bar bug taken from http://stackoverflow.com/questions/40176244/how-to-disable-bottomnavigationview-shift-mode
+//This code makes all the icons show its labels
 public class BottomNavigationViewHelper {
     public static void disableShiftMode(BottomNavigationView view) {
         BottomNavigationMenuView menuView = (BottomNavigationMenuView) view.getChildAt(0);

@@ -15,6 +15,7 @@ public class intro extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_intro);
 
+        //If the login button is pressed, the app will be taken to the login page.
         Button login = (Button)findViewById(R.id.intro_login);
         login.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
@@ -22,7 +23,7 @@ public class intro extends AppCompatActivity {
                 startActivityForResult(myIntent, 0);
             }
         });
-
+        //If the signup button is pressed, the app will be taken to the signup page.
         Button signup = (Button)findViewById(R.id.intro_signup);
         signup.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {

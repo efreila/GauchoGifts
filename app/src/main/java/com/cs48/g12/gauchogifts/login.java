@@ -46,6 +46,7 @@ public class login extends AppCompatActivity {
 
     }
 
+    //Ensures that the user fills out all the information necessary to login.
     private void userLogin() {
 
         if(TextUtils.isEmpty(txtEmailLogin.getText().toString().trim())) {
@@ -77,6 +78,7 @@ public class login extends AppCompatActivity {
 
     }
 
+    //This checks if the user has verified their account and prevents them from logging in if they hadn't.
     private void checkIfEmailVerified() {
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();

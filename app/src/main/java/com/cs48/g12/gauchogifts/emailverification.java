@@ -18,6 +18,7 @@ public class emailverification extends AppCompatActivity {
         setContentView(R.layout.activity_emailverification);
     }
 
+    //Takes user to the login activity when the login button is clicked.
     public void verifLoginBtnClicked(View view) {
         Intent loginIntent = new Intent(emailverification.this, login.class);
         startActivity(loginIntent);

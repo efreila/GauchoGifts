@@ -62,12 +62,13 @@ public class giftexchange extends AppCompatActivity {
 
         Bundle geinfo = getIntent().getExtras();
 
+        //When the activity is loaded the specific title of the exchange chosen is displayed
         String exTitle = geinfo.getString("Title");
         acTitle.setText(exTitle);
-
+        //When the activity is loaded the deadline of the exchange chosen is displayed
         String exDeadline = geinfo.getString("Deadline");
         acDeadline.setText(exDeadline);
-
+        //When the activity is loaded the description of the exchange chosen is displayed
         String exDescription = geinfo.getString("Description");
         acDescription.setText(exDescription);
     }

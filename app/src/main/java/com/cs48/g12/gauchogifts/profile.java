@@ -108,6 +108,7 @@ public class profile extends AppCompatActivity {
         interestInput = (TextView) findViewById(R.id.interestInput);
         Country = (TextView) findViewById(R.id.country);
 
+        //Checks if the current user is signed in or not. Prevents bugs.
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
@@ -142,7 +143,7 @@ public class profile extends AppCompatActivity {
             }
         }
 */
-
+        //Loads the current user's first name.
         String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
         mRef = new Firebase("https://gauchogifts.firebaseio.com/Users/" + uid + "/User Info/First Name");
 
@@ -159,7 +160,7 @@ public class profile extends AppCompatActivity {
 
             }
         });
-
+        //Loads the current user's last name.
         mRef = new Firebase("https://gauchogifts.firebaseio.com/Users/" + uid + "/User Info/Last Name");
 
         mRef.addValueEventListener(new com.firebase.client.ValueEventListener() {
@@ -175,7 +176,7 @@ public class profile extends AppCompatActivity {
 
             }
         });
-
+        //Loads the current user's Credit information.
         mRef = new Firebase("https://gauchogifts.firebaseio.com/Users/" + uid + "/User Info/Credits");
 
         mRef.addValueEventListener(new com.firebase.client.ValueEventListener() {
@@ -191,7 +192,7 @@ public class profile extends AppCompatActivity {
 
             }
         });
-
+        //Loads the current user's Address
         mRef = new Firebase("https://gauchogifts.firebaseio.com/Users/" + uid + "/User Info/Address Line One");
 
         mRef.addValueEventListener(new com.firebase.client.ValueEventListener() {
@@ -207,7 +208,7 @@ public class profile extends AppCompatActivity {
 
             }
         });
-
+        //Loads the rest of the current user's Address
         mRef = new Firebase("https://gauchogifts.firebaseio.com/Users/" + uid + "/User Info/Address Line Two");
 
         mRef.addValueEventListener(new com.firebase.client.ValueEventListener() {
@@ -223,7 +224,7 @@ public class profile extends AppCompatActivity {
 
             }
         });
-
+        //Loads the current user's city.
         mRef = new Firebase("https://gauchogifts.firebaseio.com/Users/" + uid + "/User Info/City");
 
         mRef.addValueEventListener(new com.firebase.client.ValueEventListener() {
@@ -239,7 +240,7 @@ public class profile extends AppCompatActivity {
 
             }
         });
-
+        //Loads the current user's state.
         mRef = new Firebase("https://gauchogifts.firebaseio.com/Users/" + uid + "/User Info/State");
 
         mRef.addValueEventListener(new com.firebase.client.ValueEventListener() {
@@ -255,7 +256,7 @@ public class profile extends AppCompatActivity {
 
             }
         });
-
+        //Loads the current user's ZIP code.
         mRef = new Firebase("https://gauchogifts.firebaseio.com/Users/" + uid + "/User Info/ZIP");
 
         mRef.addValueEventListener(new com.firebase.client.ValueEventListener() {
@@ -271,7 +272,7 @@ public class profile extends AppCompatActivity {
 
             }
         });
-
+        //Loads the current user's country.
         mRef = new Firebase("https://gauchogifts.firebaseio.com/Users/" + uid + "/User Info/Country");
 
         mRef.addValueEventListener(new com.firebase.client.ValueEventListener() {
