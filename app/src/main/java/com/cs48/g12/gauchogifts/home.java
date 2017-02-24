@@ -64,6 +64,7 @@ public class home extends AppCompatActivity {
 
         String uID = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
+        //Establishes connection to Firebase to display the current users current exchanges.
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReferenceFromUrl(
                 "https://gauchogifts.firebaseio.com/Users/" + uID + "/Current Exchanges");
 
@@ -84,6 +85,8 @@ public class home extends AppCompatActivity {
                 textView.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View view) {
 
+                        //Passes the information retrieved from the URL above to the next activity. This is needed to display the correct information
+                        //based on the exchange chosen.
                         Firebase geTitle = new Firebase("https://gauchogifts.firebaseio.com/Exchanges/" + gemodel + "/Title");
                         Firebase geDeadline = new Firebase("https://gauchogifts.firebaseio.com/Exchanges/" + gemodel + "/Deadline");
                         Firebase geDescription = new Firebase("https://gauchogifts.firebaseio.com/Exchanges/" + gemodel + "/Description");

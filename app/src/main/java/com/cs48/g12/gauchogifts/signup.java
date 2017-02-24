@@ -60,7 +60,7 @@ public class signup extends AppCompatActivity {
         mCountry = (EditText)findViewById(R.id.signup_country);
         FirebaseAuth.getInstance().signOut();
 
-
+        //Checks if the user is signed in. Necessary to prevent bugs.
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -98,7 +98,7 @@ public class signup extends AppCompatActivity {
             mAuth.removeAuthStateListener(mAuthListener);
         }
     }
-
+    //Sends the vertification email if the user successfully completes the signup process.
     private void sendVerificationEmail()
     {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -128,7 +128,7 @@ public class signup extends AppCompatActivity {
     }
 
     private void startRegister() {
-
+        //The if and else if statements ensures that the user appropriately fills out their information.
         if(TextUtils.isEmpty(mFirstName.getText().toString().trim())) {
             Toast.makeText(signup.this, "Please enter your first name.", Toast.LENGTH_LONG).show();
             return;
@@ -188,6 +188,7 @@ public class signup extends AppCompatActivity {
             mProgress.setMessage("Signing up...");
             mProgress.show();
 
+            //If the signup process was successful, this adds the user to the Firebase database.
             mAuth.createUserWithEmailAndPassword(mEmail.getText().toString().trim(), mPassword.getText().toString().trim()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
