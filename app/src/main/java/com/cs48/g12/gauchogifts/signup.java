@@ -37,6 +37,7 @@ public class signup extends AppCompatActivity {
     private EditText mCountry;
     private EditText mLastName;
     private EditText mPassword;
+    private EditText mConfirmPassword;
     private Button btnSignUp;
     private ProgressDialog mProgress;
 
@@ -48,6 +49,7 @@ public class signup extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         mEmail = (EditText)findViewById(R.id.signup_email);
         mPassword = (EditText)findViewById(R.id.signup_password);
+        mConfirmPassword = (EditText)findViewById(R.id.signup_confirmpass);
         btnSignUp = (Button)findViewById(R.id.signup_signup);
         mProgress = new ProgressDialog(this);
         mFirstName = (EditText)findViewById(R.id.signup_firstname);
@@ -181,6 +183,10 @@ public class signup extends AppCompatActivity {
 
         else if(mPassword.getText().toString().trim().length() < 6) {
             Toast.makeText(signup.this, "Password must be at least 6 characters.", Toast.LENGTH_LONG).show();
+        }
+
+        else if(!mPassword.getText().toString().trim().equals(mConfirmPassword.getText().toString().trim())) {
+            Toast.makeText(signup.this, "Confirmed password does not match password.", Toast.LENGTH_LONG).show();
         }
 
         else {
