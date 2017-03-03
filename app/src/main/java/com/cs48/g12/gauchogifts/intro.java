@@ -31,6 +31,10 @@ public class intro extends AppCompatActivity {
                 startActivityForResult(myIntent1, 0);
             }
         });
-
+    }
+    protected void sendMessage(View v)
+    {
+        Intent intent = new Intent(getApplicationContext(), info.class);
+        startActivity(intent);
     }
 }
