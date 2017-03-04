@@ -51,41 +51,7 @@ public class profile extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
-
-        //Navigation Bar
-        bottomNavigationView = (BottomNavigationView)findViewById(R.id.bottomNavigationView);
-        bottomNavigationView.getMenu().getItem(3).setChecked(true);
-        BottomNavigationViewHelper.disableShiftMode(bottomNavigationView);
-
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-
-                if (item.getItemId() == R.id.Home) {
-                    bottomNavigationView.getMenu().getItem(0).setChecked(true);
-                    Intent myIntent = new Intent(profile.this, home.class);
-                    startActivity(myIntent);
-                    finish();
-                } else if (item.getItemId() == R.id.AddGE) {
-                    bottomNavigationView.getMenu().getItem(1).setChecked(true);
-                    Intent myIntent = new Intent(profile.this, home.class);
-                    startActivity(myIntent);
-                    finish();
-                } else if (item.getItemId() == R.id.FAQ) {
-                    bottomNavigationView.getMenu().getItem(2).setChecked(true);
-                    Intent myIntent = new Intent(profile.this, home.class);
-                    startActivity(myIntent);
-                    finish();
-                } else if (item.getItemId() == R.id.Profile) {
-                    bottomNavigationView.getMenu().getItem(3).setChecked(true);
-                    Intent myIntent = new Intent(profile.this, profile.class);
-                    startActivity(myIntent);
-                    finish();
-                }
-                return false;
-            }
-        });
-
+        
         mAuth = FirebaseAuth.getInstance();
         userImageBtn = (ImageButton) findViewById(R.id.userImage);
         userImageBtn.setOnClickListener(new View.OnClickListener()

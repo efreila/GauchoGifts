@@ -24,7 +24,11 @@
         <activity android:name=".profile" />
         <activity android:name=".home" />
         <activity android:name=".giftexchange" />
-        <activity android:name=".info"></activity>
+        <activity android:name=".info" />
+        <activity
+            android:name=".navheader"
+            android:label="@string/title_activity_navheader"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

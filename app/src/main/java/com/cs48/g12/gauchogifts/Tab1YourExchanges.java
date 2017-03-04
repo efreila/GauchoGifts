@@ -1,12 +1,12 @@
 package com.cs48.g12.gauchogifts;
 
 import android.content.Intent;
-import android.support.annotation.NonNull;
-import android.support.design.widget.BottomNavigationView;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.MenuItem;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -17,17 +17,22 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class home extends AppCompatActivity {
+
+public class Tab1YourExchanges extends Fragment {
 
     private ListView exchanges;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View rootView = inflater.inflate(R.layout.tab1yourexchanges, container, false);
+        return rootView;
+    }
 
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
-        exchanges = (ListView)findViewById(R.id.Exchanges);
+        exchanges = (ListView) view.findViewById(R.id.Exchanges);
 
         String uID = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
@@ -36,16 +41,12 @@ public class home extends AppCompatActivity {
                 "https://gauchogifts.firebaseio.com/Users/" + uID + "/Current Exchanges");
 
         FirebaseListAdapter<String> firebaseListAdapter = new FirebaseListAdapter<String>(
-                this,
-                String.class,
-                android.R.layout.simple_list_item_1,
-                databaseReference
-        ) {
+                getActivity(), String.class, android.R.layout.simple_list_item_1, databaseReference) {
             @Override
             protected void populateView(View v, String model, int position) {
 
                 final String gemodel = model;
-                final Intent myIntent = new Intent(home.this, giftexchange.class);
+                final Intent myIntent = new Intent(getActivity(), giftexchange.class);
 
                 TextView textView = (TextView) v.findViewById(android.R.id.text1);
                 textView.setText(model);
@@ -63,7 +64,7 @@ public class home extends AppCompatActivity {
                             public void onDataChange(com.firebase.client.DataSnapshot dataSnapshot) {
                                 String getitle = dataSnapshot.getValue(String.class);
                                 myIntent.putExtra("Title", getitle);
-                                startActivity(myIntent);
+                                getActivity().startActivity(myIntent);
                             }
 
                             @Override
@@ -77,7 +78,7 @@ public class home extends AppCompatActivity {
                             public void onDataChange(com.firebase.client.DataSnapshot dataSnapshot) {
                                 String gedeadline = dataSnapshot.getValue(String.class);
                                 myIntent.putExtra("Deadline", gedeadline);
-                                startActivity(myIntent);
+                                getActivity().startActivity(myIntent);
                             }
 
                             @Override
@@ -91,7 +92,7 @@ public class home extends AppCompatActivity {
                             public void onDataChange(com.firebase.client.DataSnapshot dataSnapshot) {
                                 String gedescription = dataSnapshot.getValue(String.class);
                                 myIntent.putExtra("Description", gedescription);
-                                startActivity(myIntent);
+                                getActivity().startActivity(myIntent);
                             }
 
                             @Override
@@ -105,5 +106,5 @@ public class home extends AppCompatActivity {
         };
 
         exchanges.setAdapter(firebaseListAdapter);
-    };
+    }
 }
