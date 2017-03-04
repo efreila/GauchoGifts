@@ -24,6 +24,7 @@ public class login extends AppCompatActivity {
     private EditText txtEmailLogin;
     private EditText txtPasswordLogin;
     private Button loginBtn;
+    private ProgressDialog mProgress;
 
 
     @Override
@@ -35,10 +36,14 @@ public class login extends AppCompatActivity {
         txtPasswordLogin = (EditText)findViewById(R.id.login_password);
         loginBtn = (Button)findViewById(R.id.login_login);
         mAuth = FirebaseAuth.getInstance();
+        mProgress = new ProgressDialog(this);
+
 
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mProgress.setMessage("Logging in...");
+                mProgress.show();
                 userLogin();
             }
         });
@@ -86,10 +91,10 @@ public class login extends AppCompatActivity {
         if (user.isEmailVerified())
         {
             // user is verified, so you can finish this activity or send user to activity which you want.
-            Toast.makeText(login.this, "Successfully logged in", Toast.LENGTH_SHORT).show();
             Intent myIntent = new Intent(login.this, navheader.class);
             startActivity(myIntent);
             finish();
+            mProgress.dismiss();
         }
         else
         {
