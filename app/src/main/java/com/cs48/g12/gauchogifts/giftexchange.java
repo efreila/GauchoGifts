@@ -38,4 +38,11 @@ public class giftexchange extends AppCompatActivity {
         String exDescription = geinfo.getString("Description");
         acDescription.setText(exDescription);
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent myIntent = new Intent(giftexchange.this, navheader.class);
+        startActivity(myIntent);
+    }
 }
