@@ -1,5 +1,7 @@
 package com.cs48.g12.gauchogifts;
 
+import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -9,36 +11,52 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.text.InputType;
+import android.view.View.OnClickListener;
+import android.view.inputmethod.InputMethodManager;
+import android.content.Context;
 
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
-public class Tab4Profile extends Fragment {
+
+
+
+public class Tab4Profile extends Fragment implements View.OnClickListener{
 
     public static final int GET_PIC = 1;
     ImageButton userImageBtn;
     TextView firstName, lastName, street1, street2, City, State, Zip, Credits, Country;
-    TextView interestInput;
+    EditText interestInput;
     private TextView saveText;
     private FirebaseAuth mAuth;
     private Firebase mRef;
     private FirebaseAuth.AuthStateListener mAuthListener;
     private BottomNavigationView bottomNavigationView;
-    Button done;
+    Button saveNameBtn, editNameBtn, saveAddressBtn, editAddressBtn, saveInterestBtn, editInterestBtn;
+
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.tab4profile, container, false);
         return rootView;
+
+
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
 
 
         mAuth = FirebaseAuth.getInstance();
@@ -60,8 +78,28 @@ public class Tab4Profile extends Fragment {
         City = (TextView) view.findViewById(R.id.City);
         State = (TextView) view.findViewById(R.id.State);
         Zip = (TextView) view.findViewById(R.id.Zip);
-        interestInput = (TextView) view.findViewById(R.id.interestInput);
+        interestInput = (EditText) view.findViewById(R.id.interestInput);
+        interestInput.setEnabled(false);
         Country = (TextView) view.findViewById(R.id.country);
+        saveNameBtn = (Button) view.findViewById(R.id.saveName);
+        editNameBtn = (Button) view.findViewById(R.id.editName);
+        saveAddressBtn = (Button) view.findViewById(R.id.saveAddress);
+        editAddressBtn = (Button) view.findViewById(R.id.editAddress);
+        saveInterestBtn = (Button) view.findViewById(R.id.saveInterests);
+        editInterestBtn = (Button) view.findViewById(R.id.editInterests);
+
+        saveNameBtn = (Button) getView().findViewById(R.id.saveName);
+        saveNameBtn.setOnClickListener(this); // calling onClick() method
+        editNameBtn = (Button) getView().findViewById(R.id.editName);
+        editNameBtn.setOnClickListener(this);
+        saveAddressBtn = (Button) getView().findViewById(R.id.saveAddress);
+        saveAddressBtn.setOnClickListener(this); // calling onClick() method
+        editAddressBtn = (Button) getView().findViewById(R.id.editAddress);
+        editAddressBtn.setOnClickListener(this);
+        saveInterestBtn = (Button) getView().findViewById(R.id.saveInterests);
+        saveInterestBtn.setOnClickListener(this); // calling onClick() method
+        editInterestBtn = (Button) getView().findViewById(R.id.editInterests);
+        editInterestBtn.setOnClickListener(this);
 
         //Checks if the current user is signed in or not. Prevents bugs.
         mAuthListener = new FirebaseAuth.AuthStateListener() {
@@ -83,21 +121,6 @@ public class Tab4Profile extends Fragment {
             }
         };
 
-        /*
-        @Override
-        public void onStart() {
-            super.onStart();
-            mAuth.addAuthStateListener(mAuthListener);
-        }
-
-        @Override
-        public void onStop() {
-            super.onStop();
-            if (mAuthListener != null) {
-                mAuth.removeAuthStateListener(mAuthListener);
-            }
-        }
-*/
         //Loads the current user's first name.
         String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
         mRef = new Firebase("https://gauchogifts.firebaseio.com/Users/" + uid + "/User Info/First Name");
@@ -147,6 +170,7 @@ public class Tab4Profile extends Fragment {
 
             }
         });
+
         //Loads the current user's Address
         mRef = new Firebase("https://gauchogifts.firebaseio.com/Users/" + uid + "/User Info/Address Line One");
 
@@ -244,17 +268,189 @@ public class Tab4Profile extends Fragment {
             }
         });
 
+        //Loads the current user's country.
+        mRef = new Firebase("https://gauchogifts.firebaseio.com/Users/" + uid + "/User Info/Interests");
 
-        /*//when done button clicked goes to display profile class
-        Button done = (Button) findViewById(R.id.donebtn);
-        done.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-                Intent myIntent = new Intent(view.getContext(), profileDisplay.class);
-                startActivityForResult(myIntent, 0);
+        mRef.addValueEventListener(new com.firebase.client.ValueEventListener() {
+            @Override
+            public void onDataChange(com.firebase.client.DataSnapshot dataSnapshot) {
+                String interest = dataSnapshot.getValue(String.class);
+
+                interestInput.setText(interest);
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+
             }
         });
-        */
 
+
+
+    }
+
+    @Override
+    public void onClick(View v1) {
+        if (v1.getId() == R.id.saveName)
+        {
+                InputMethodManager inputManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                inputManager.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+
+                FirebaseDatabase database = FirebaseDatabase.getInstance();
+                DatabaseReference myRef = database.getReference();
+
+                //saveNameBtn.setVisibility(v1.INVISIBLE);
+                editNameBtn.setVisibility(v1.VISIBLE);
+
+                myRef.child("Users").child(mAuth.getCurrentUser().getUid()).child("User Info").child("First Name").setValue(firstName.getText().toString().trim());
+                myRef.child("Users").child(mAuth.getCurrentUser().getUid()).child("User Info").child("Last Name").setValue(lastName.getText().toString().trim());
+
+                firstName.setCursorVisible(false);
+                firstName.setFocusableInTouchMode(false);
+                firstName.setInputType(InputType.TYPE_NULL);
+                firstName.setText(firstName.getText().toString().trim());
+
+                lastName.setCursorVisible(false);
+                lastName.setFocusableInTouchMode(false);
+                lastName.setInputType(InputType.TYPE_NULL);
+                lastName.setText(lastName.getText().toString().trim());
+
+        }
+
+        else if (v1.getId() == R.id.editName){
+                saveNameBtn.setVisibility(v1.VISIBLE);
+                //editNameBtn.setVisibility(v1.INVISIBLE);
+
+                firstName.setCursorVisible(true);
+                firstName.setFocusableInTouchMode(true);
+                firstName.setInputType(InputType.TYPE_CLASS_TEXT);
+                firstName.requestFocus();
+                firstName.setText("");
+                firstName.setHint("First Name");
+
+                lastName.setCursorVisible(true);
+                lastName.setFocusableInTouchMode(true);
+                lastName.setInputType(InputType.TYPE_CLASS_TEXT);
+                lastName.requestFocus();
+                lastName.setText("");
+                lastName.setHint("Last Name");
+
+                firstName.setHintTextColor(Color.RED);
+                lastName.setHintTextColor(Color.RED);
+
+
+        }
+
+        else if (v1.getId() == R.id.saveAddress) {
+
+                InputMethodManager inputManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                inputManager.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+
+                FirebaseDatabase database = FirebaseDatabase.getInstance();
+                DatabaseReference myRef = database.getReference();
+
+                editAddressBtn.setVisibility(v1.VISIBLE);
+
+                myRef.child("Users").child(mAuth.getCurrentUser().getUid()).child("User Info").child("Address Line One").setValue(street1.getText().toString().trim());
+                myRef.child("Users").child(mAuth.getCurrentUser().getUid()).child("User Info").child("Address Line Two").setValue(street2.getText().toString().trim());
+                myRef.child("Users").child(mAuth.getCurrentUser().getUid()).child("User Info").child("City").setValue(City.getText().toString().trim());
+                myRef.child("Users").child(mAuth.getCurrentUser().getUid()).child("User Info").child("State").setValue(State.getText().toString().trim());
+                myRef.child("Users").child(mAuth.getCurrentUser().getUid()).child("User Info").child("ZIP").setValue(Zip.getText().toString().trim());
+                myRef.child("Users").child(mAuth.getCurrentUser().getUid()).child("User Info").child("Country").setValue(Country.getText().toString().trim());
+
+                street1.setCursorVisible(false);
+                street1.setFocusableInTouchMode(false);
+                street1.setInputType(InputType.TYPE_NULL);
+
+                street2.setCursorVisible(false);
+                street2.setFocusableInTouchMode(false);
+                street2.setInputType(InputType.TYPE_NULL);
+
+                City.setCursorVisible(false);
+                City.setFocusableInTouchMode(false);
+                City.setInputType(InputType.TYPE_NULL);
+
+                State.setCursorVisible(false);
+                State.setFocusableInTouchMode(false);
+                State.setInputType(InputType.TYPE_NULL);
+
+                Zip.setCursorVisible(false);
+                Zip.setFocusableInTouchMode(false);
+                Zip.setInputType(InputType.TYPE_NULL);
+
+                Country.setCursorVisible(false);
+                Country.setFocusableInTouchMode(false);
+                Country.setInputType(InputType.TYPE_NULL);
+
+        }
+
+        else if (v1.getId() == R.id.editAddress){
+                saveAddressBtn.setVisibility(v1.VISIBLE);
+
+                street1.setCursorVisible(true);
+                street1.setFocusableInTouchMode(true);
+                street1.setInputType(InputType.TYPE_CLASS_TEXT);
+                street1.requestFocus();
+                street1.setText("");
+                street1.setHint("Address Line 1");
+                street1.setHintTextColor(Color.RED);
+
+                street2.setCursorVisible(true);
+                street2.setFocusableInTouchMode(true);
+                street2.setInputType(InputType.TYPE_CLASS_TEXT);
+                street2.requestFocus();
+                street2.setText("");
+                street2.setHint("Address Line 2");
+                street2.setHintTextColor(Color.RED);
+
+                City.setCursorVisible(true);
+                City.setFocusableInTouchMode(true);
+                City.setInputType(InputType.TYPE_CLASS_TEXT);
+                City.requestFocus();
+                City.setText("");
+                City.setHint("City");
+                City.setHintTextColor(Color.RED);
+
+                State.setCursorVisible(true);
+                State.setFocusableInTouchMode(true);
+                State.setInputType(InputType.TYPE_CLASS_TEXT);
+                State.requestFocus();
+                State.setText("");
+                State.setHint("State");
+                State.setHintTextColor(Color.RED);
+
+                Zip.setCursorVisible(true);
+                Zip.setFocusableInTouchMode(true);
+                Zip.setInputType(InputType.TYPE_CLASS_TEXT);
+                Zip.requestFocus();
+                Zip.setText("");
+                Zip.setHint("ZIP");
+                Zip.setHintTextColor(Color.RED);
+
+                Country.setCursorVisible(true);
+                Country.setFocusableInTouchMode(true);
+                Country.setInputType(InputType.TYPE_CLASS_TEXT);
+                Country.requestFocus();
+                Country.setText("");
+                Country.setHint("Country");
+                Country.setHintTextColor(Color.RED);
+        }
+
+        else if (v1.getId() == R.id.saveInterests)
+        {
+            FirebaseDatabase database = FirebaseDatabase.getInstance();
+            DatabaseReference myRef = database.getReference();
+
+            myRef.child("Users").child(mAuth.getCurrentUser().getUid()).child("User Info").child("Interests").setValue(interestInput.getText().toString().trim());
+
+            interestInput.setEnabled(false);
+
+            editInterestBtn.setVisibility(v1.VISIBLE);
+        }
+
+        else if (v1.getId() == R.id.editInterests){
+            interestInput.setEnabled(true);
+        }
 
     }
 }
