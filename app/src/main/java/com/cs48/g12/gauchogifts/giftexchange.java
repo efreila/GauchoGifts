@@ -7,6 +7,8 @@ import android.support.v4.widget.TextViewCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 
@@ -37,7 +39,16 @@ public class giftexchange extends AppCompatActivity {
         //When the activity is loaded the description of the exchange chosen is displayed
         String exDescription = geinfo.getString("Description");
         acDescription.setText(exDescription);
-    }
+
+        Button join = (Button)findViewById(R.id.joinBtn);
+        join.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                Intent myIntent = new Intent(view.getContext(), navheader.class);
+                startActivityForResult(myIntent, 0);
+            }
+        });
+
+    };
 
     @Override
     public void onBackPressed() {

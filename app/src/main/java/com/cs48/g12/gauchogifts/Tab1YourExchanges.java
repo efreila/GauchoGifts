@@ -20,7 +20,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class Tab1YourExchanges extends Fragment {
 
-    private ListView exchanges;
+    private ListView joinedexchanges;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -32,7 +32,7 @@ public class Tab1YourExchanges extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        exchanges = (ListView) view.findViewById(R.id.Exchanges);
+        joinedexchanges = (ListView) view.findViewById(R.id.Exchanges);
 
         String uID = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
@@ -105,6 +105,6 @@ public class Tab1YourExchanges extends Fragment {
             }
         };
 
-        exchanges.setAdapter(firebaseListAdapter);
+        joinedexchanges.setAdapter(firebaseListAdapter);
     }
 }
