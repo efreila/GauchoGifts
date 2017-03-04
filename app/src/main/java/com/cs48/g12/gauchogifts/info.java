@@ -49,8 +49,8 @@ public class info extends AppCompatActivity {
     public void toggle_contents(View v) {
         answer1.setVisibility(answer1.isShown()
                 ? View.INVISIBLE
-                : View.VISIBLE);
-    }
+    : View.VISIBLE);
+}
     public void toggle_contents2(View v) {
         answer2.setVisibility(answer2.isShown()
                 ? View.INVISIBLE
@@ -61,10 +61,10 @@ public class info extends AppCompatActivity {
                 ? View.INVISIBLE
                 : View.VISIBLE);
     } public void toggle_contents4(View v) {
-        answer4.setVisibility(answer4.isShown()
-                ? View.INVISIBLE
-                : View.VISIBLE);
-    }
+    answer4.setVisibility(answer4.isShown()
+            ? View.INVISIBLE
+            : View.VISIBLE);
+}
     public void toggle_contents5(View v) {
         answer5.setVisibility(answer5.isShown()
                 ? View.INVISIBLE

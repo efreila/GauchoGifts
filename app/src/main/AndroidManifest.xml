@@ -22,7 +22,6 @@
         <activity android:name=".signup" />
         <activity android:name=".emailverification" />
         <activity android:name=".profile" />
-        <activity android:name=".home" />
         <activity android:name=".giftexchange" />
         <activity android:name=".info" />
         <activity

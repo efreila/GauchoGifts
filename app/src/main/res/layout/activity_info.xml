@@ -15,7 +15,7 @@
         tools:context="com.cs48.g12.gauchogifts.questions">
 
 
-        <TextView   android:id="@+id/question1"
+        <TextView android:id="@+id/question1"
 
             android:text="What is Gaucho Gifts?"
             android:textColor="#919191"
@@ -30,7 +30,7 @@
             android:layout_alignParentStart="true" />
 
 
-        <TextView   android:id="@+id/question4"
+        <TextView android:id="@+id/question4"
 
             android:text="Do I need to send my present through the mail?"
             android:textColor="#919191"
@@ -44,7 +44,7 @@
             android:layout_alignParentStart="true"
             android:layout_marginTop="54dp" />
 
-        <TextView   android:id="@+id/answer4"
+        <TextView android:id="@+id/answer4"
             android:text="No. Given the close proximity of Isla Vista, you are given the option of delievering your gift to your Gaucho Gift match."
             android:textSize="15sp"
             android:textColor="#000000"
@@ -65,7 +65,7 @@
             android:id="@+id/textView"
             android:layout_alignParentStart="true" />
 
-        <TextView   android:id="@+id/question2"
+        <TextView android:id="@+id/question2"
 
             android:text="How much am I expected to pay?"
             android:textColor="#919191"
@@ -79,7 +79,7 @@
             android:layout_alignTop="@+id/answer1"
             android:layout_alignParentStart="true" />
 
-        <TextView   android:id="@+id/answer3"
+        <TextView android:id="@+id/answer3"
             android:text="Answer to that question"
             android:textSize="15sp"
             android:textColor="#000000"
@@ -89,7 +89,7 @@
             android:layout_alignTop="@+id/question3"
             android:layout_alignParentStart="true" />
 
-        <TextView   android:id="@+id/question5"
+        <TextView android:id="@+id/question5"
 
             android:text="What happens if I don't get a gift?"
             android:textColor="#919191"
@@ -103,7 +103,7 @@
             android:layout_alignParentStart="true"
             android:layout_marginTop="85dp" />
 
-        <TextView   android:id="@+id/question6"
+        <TextView android:id="@+id/question6"
 
             android:text="Can I cancel my participation?"
             android:textColor="#919191"
@@ -117,7 +117,7 @@
             android:layout_alignTop="@+id/answer5"
             android:layout_alignParentStart="true" />
 
-        <TextView   android:id="@+id/answer6"
+        <TextView android:id="@+id/answer6"
             android:text="Answer to the question"
             android:textSize="15sp"
             android:textColor="#000000"
@@ -128,7 +128,7 @@
             android:layout_alignParentStart="true" />
 
 
-        <TextView   android:id="@+id/answer5"
+        <TextView android:id="@+id/answer5"
             android:text="You will be rematched with a new Santa, and your failed Gaucho Santa will be ban from entering into future gift exchanges."
             android:textSize="15sp"
             android:textColor="#000000"
@@ -148,7 +148,7 @@
             android:layout_alignParentStart="true"
             android:layout_marginTop="27dp" />
 
-        <TextView   android:id="@+id/question3"
+        <TextView android:id="@+id/question3"
 
             android:text="How often do exchanges happen?"
             android:textColor="#919191"
@@ -162,7 +162,7 @@
             android:layout_below="@+id/answer2"
             android:layout_alignParentStart="true" />
 
-        <TextView   android:id="@+id/answer2"
+        <TextView android:id="@+id/answer2"
             android:text="We recommend spending about $15 - $20. This is not a strict requirement, but we expect you to be thoughtful and show effort. "
             android:textSize="15sp"
             android:textColor="#000000"

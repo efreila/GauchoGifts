@@ -1,3 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,9 +14,168 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.cs48.g12.gauchogifts.navheader$PlaceholderFragment">
 
-    <TextView
-        android:id="@+id/section_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+    <TextView android:id="@+id/question1"
+        android:text="What is Gaucho Gifts?"
+        android:textColor="#919191"
+        android:textSize="16sp"
+        android:clickable="true"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textAppearance="@style/TextAppearance.AppCompat.Button"
+        android:layout_marginTop="69dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
 
-</RelativeLayout>
+    <TextView android:id="@+id/question4"
+        android:text="Do I need to send my present through the mail?"
+        android:textColor="#919191"
+        android:textSize="16sp"
+        android:clickable="true"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textAppearance="@style/TextAppearance.AppCompat.Button"
+        android:layout_alignTop="@+id/answer3"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="54dp" />
+
+    <TextView android:id="@+id/answer4"
+        android:text="No. Given the close proximity of Isla Vista, you are given the option of delievering your gift to your Gaucho Gift match."
+        android:textSize="15sp"
+        android:textColor="#000000"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="54dp"
+        android:layout_alignTop="@+id/question4"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:text="About Gaucho Gifts"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="15dp"
+        android:textSize="25sp"
+        android:textColor="#494949"
+        android:id="@+id/textView"
+        android:layout_alignParentStart="true" />
+
+    <TextView android:id="@+id/question2"
+
+        android:text="How much am I expected to pay?"
+        android:textColor="#919191"
+        android:textSize="16sp"
+        android:clickable="true"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textAppearance="@style/TextAppearance.AppCompat.Button"
+        android:layout_marginTop="85dp"
+        android:layout_alignTop="@+id/answer1"
+        android:layout_alignParentStart="true" />
+
+    <TextView android:id="@+id/answer3"
+        android:text="Answer to that question"
+        android:textSize="15sp"
+        android:textColor="#000000"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="46dp"
+        android:layout_alignTop="@+id/question3"
+        android:layout_alignParentStart="true" />
+
+    <TextView android:id="@+id/question5"
+
+        android:text="What happens if I don't get a gift?"
+        android:textColor="#919191"
+        android:textSize="16sp"
+        android:clickable="true"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textAppearance="@style/TextAppearance.AppCompat.Button"
+        android:layout_alignTop="@+id/answer4"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="85dp" />
+
+    <TextView android:id="@+id/question6"
+
+        android:text="Can I cancel my participation?"
+        android:textColor="#919191"
+        android:textSize="16sp"
+        android:clickable="true"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textAppearance="@style/TextAppearance.AppCompat.Button"
+        android:layout_marginTop="85dp"
+        android:layout_alignTop="@+id/answer5"
+        android:layout_alignParentStart="true" />
+
+    <TextView android:id="@+id/answer6"
+        android:text="Answer to the question"
+        android:textSize="15sp"
+        android:textColor="#000000"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="53dp"
+        android:layout_alignTop="@+id/question6"
+        android:layout_alignParentStart="true" />
+
+
+    <TextView android:id="@+id/answer5"
+        android:text="You will be rematched with a new Santa, and your failed Gaucho Santa will be ban from entering into future gift exchanges."
+        android:textSize="15sp"
+        android:textColor="#000000"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="46dp"
+        android:layout_alignTop="@+id/question5"
+        android:layout_alignParentStart="true" />
+
+    <TextView   android:id="@+id/answer1"
+        android:text="Gaucho Gifts is a UCSB student gift exchange created to spread happiness throughout the campus and Isla Vista. "
+        android:textSize="16sp"
+        android:textColor="#000000"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignTop="@+id/question1"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="27dp" />
+
+    <TextView android:id="@+id/question3"
+
+        android:text="How often do exchanges happen?"
+        android:textColor="#919191"
+        android:textSize="16sp"
+        android:clickable="true"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textAppearance="@style/TextAppearance.AppCompat.Button"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/answer2"
+        android:layout_alignParentStart="true" />
+
+    <TextView android:id="@+id/answer2"
+        android:text="We recommend spending about $15 - $20. This is not a strict requirement, but we expect you to be thoughtful and show effort. "
+        android:textSize="15sp"
+        android:textColor="#000000"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="13dp"
+        android:layout_below="@+id/question2"
+        android:layout_alignParentStart="true" />
+
+    <!--<ImageButton-->
+    <!--android:id="@+id/button3"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:src="@android:drawable/arrow_down_float"-->
+    <!--android:layout_marginLeft="280dp"-->
+    <!--android:layout_marginRight="120dp"-->
+    <!--android:layout_alignBottom="@+id/question3"-->
+    <!--android:layout_alignTop="@+id/question3" />-->
+
+    </RelativeLayout>
+</ScrollView>
+
+
+
+
+

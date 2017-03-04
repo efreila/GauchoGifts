@@ -44,14 +44,13 @@ public class profile extends AppCompatActivity {
     private Firebase mRef;
     private FirebaseAuth.AuthStateListener mAuthListener;
     private BottomNavigationView bottomNavigationView;
-
     Button done;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
-        
+
         mAuth = FirebaseAuth.getInstance();
         userImageBtn = (ImageButton) findViewById(R.id.userImage);
         userImageBtn.setOnClickListener(new View.OnClickListener()
