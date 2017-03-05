@@ -1,6 +1,7 @@
 package com.cs48.g12.gauchogifts;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -9,18 +10,26 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.ui.database.FirebaseListAdapter;
+import com.google.android.gms.vision.text.Text;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 
 public class Tab2JoinExchange extends Fragment {
 
     private ListView joinexchanges;
+    private FirebaseAuth mAuth;
+    private Integer id;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -33,20 +42,38 @@ public class Tab2JoinExchange extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         joinexchanges = (ListView) view.findViewById(R.id.allexchanges);
+        mAuth = FirebaseAuth.getInstance();
+        id = 0;
 
         //Establishes connection to Firebase to display the current users current exchanges.
         DatabaseReference databaseReference1 = FirebaseDatabase.getInstance().getReferenceFromUrl(
                 "https://gauchogifts.firebaseio.com/Exchanges/AllExchanges");
 
-        FirebaseListAdapter<String> firebaseListAdapter = new FirebaseListAdapter<String>(
+        final FirebaseListAdapter<String> firebaseListAdapter = new FirebaseListAdapter<String>(
                 getActivity(), String.class, android.R.layout.simple_list_item_1, databaseReference1) {
             @Override
-            protected void populateView(View v, String model, int position) {
-
+            protected void populateView(final View v, final String model, final int position) {
                 final String gemodel = model;
                 final Intent myIntent1 = new Intent(getActivity(), giftexchange.class);
 
-                TextView textView = (TextView) v.findViewById(android.R.id.text1);
+                final TextView textView = (TextView) v.findViewById(android.R.id.text1);
+                DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
+                rootRef.child("Users").child(mAuth.getCurrentUser().getUid()).child("Current Exchanges").addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot snapshot) {
+                        if (snapshot.hasChild(model)) {
+                            textView.setTextColor(Color.RED);
+                            textView.setText(model + " (enrolled)");
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        // Getting Post failed, log a message
+                        // ...
+                    }
+                });
+
                 textView.setText(model);
                 textView.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View view) {
@@ -103,5 +130,6 @@ public class Tab2JoinExchange extends Fragment {
             }
         };
         joinexchanges.setAdapter(firebaseListAdapter);
+
     }
 }
