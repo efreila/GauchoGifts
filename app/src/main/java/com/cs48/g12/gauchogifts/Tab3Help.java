@@ -36,7 +36,7 @@ public class Tab3Help extends Fragment implements View.OnClickListener {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        question1 = (TextView)view.findViewById(R.id.question1);
+        question1 = (TextView)view.findViewById(R.id.title);
         question1.setOnClickListener(this);
 
         question2 = (TextView)view.findViewById(R.id.question2);
@@ -83,7 +83,7 @@ public class Tab3Help extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.question1:
+            case R.id.title:
                 answer1.setVisibility(answer1.isShown() ? View.INVISIBLE : View.VISIBLE);
                 break;
             case R.id.question2:
