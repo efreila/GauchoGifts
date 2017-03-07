@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,13 +14,29 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.text.InputType;
 import android.view.View.OnClickListener;
 import android.view.inputmethod.InputMethodManager;
 import android.content.Context;
+import android.app.Activity;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.database.Cursor;
+import android.provider.MediaStore;
+import android.os.Build;
+import android.provider.DocumentsContract;
+import android.os.Environment;
+import android.annotation.TargetApi;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.BitmapDrawable;
+
+import java.io.*;
 
 import com.firebase.client.Firebase;
+import com.firebase.client.utilities.Base64.InputStream;
 import com.firebase.client.FirebaseError;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -27,12 +44,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 
-
-
 public class Tab4Profile extends Fragment implements View.OnClickListener{
 
-    public static final int GET_PIC = 1;
-    ImageButton userImageBtn;
+    private static final int GET_PIC = 1;
+    ImageView userImageBtn;
+    String selectedImagePath;
     TextView firstName, lastName, street1, street2, City, State, Zip, Credits, Country;
     EditText interestInput;
     private TextView saveText;
@@ -41,7 +57,6 @@ public class Tab4Profile extends Fragment implements View.OnClickListener{
     private FirebaseAuth.AuthStateListener mAuthListener;
     private BottomNavigationView bottomNavigationView;
     Button saveNameBtn, editNameBtn, saveAddressBtn, editAddressBtn, saveInterestBtn, editInterestBtn;
-
 
 
 
@@ -60,15 +75,9 @@ public class Tab4Profile extends Fragment implements View.OnClickListener{
 
 
         mAuth = FirebaseAuth.getInstance();
-        userImageBtn = (ImageButton) view.findViewById(R.id.userImage);
-        userImageBtn.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View view)
-            {
-                //CheckPermission();
-            }
-        });
+        userImageBtn = (ImageView) view.findViewById(R.id.userImage);
+        userImageBtn.setOnClickListener(this);
+
 
         firstName = (TextView) view.findViewById(R.id.profile_firstName);
         lastName = (TextView) view.findViewById(R.id.lastName);
@@ -289,151 +298,157 @@ public class Tab4Profile extends Fragment implements View.OnClickListener{
 
     }
 
+
+
     @Override
     public void onClick(View v1) {
-        if (v1.getId() == R.id.saveName)
+        if (v1.getId() == R.id.userImage){
+            Intent galleryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+            startActivityForResult(galleryIntent, GET_PIC);
+        }
+        else if (v1.getId() == R.id.saveName)
         {
-                InputMethodManager inputManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-                inputManager.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+            InputMethodManager inputManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+            inputManager.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
 
-                FirebaseDatabase database = FirebaseDatabase.getInstance();
-                DatabaseReference myRef = database.getReference();
+            FirebaseDatabase database = FirebaseDatabase.getInstance();
+            DatabaseReference myRef = database.getReference();
 
-                //saveNameBtn.setVisibility(v1.INVISIBLE);
-                editNameBtn.setVisibility(v1.VISIBLE);
+            //saveNameBtn.setVisibility(v1.INVISIBLE);
+            editNameBtn.setVisibility(v1.VISIBLE);
 
-                myRef.child("Users").child(mAuth.getCurrentUser().getUid()).child("User Info").child("First Name").setValue(firstName.getText().toString().trim());
-                myRef.child("Users").child(mAuth.getCurrentUser().getUid()).child("User Info").child("Last Name").setValue(lastName.getText().toString().trim());
+            myRef.child("Users").child(mAuth.getCurrentUser().getUid()).child("User Info").child("First Name").setValue(firstName.getText().toString().trim());
+            myRef.child("Users").child(mAuth.getCurrentUser().getUid()).child("User Info").child("Last Name").setValue(lastName.getText().toString().trim());
 
-                firstName.setCursorVisible(false);
-                firstName.setFocusableInTouchMode(false);
-                firstName.setInputType(InputType.TYPE_NULL);
-                firstName.setText(firstName.getText().toString().trim());
+            firstName.setCursorVisible(false);
+            firstName.setFocusableInTouchMode(false);
+            firstName.setInputType(InputType.TYPE_NULL);
+            firstName.setText(firstName.getText().toString().trim());
 
-                lastName.setCursorVisible(false);
-                lastName.setFocusableInTouchMode(false);
-                lastName.setInputType(InputType.TYPE_NULL);
-                lastName.setText(lastName.getText().toString().trim());
+            lastName.setCursorVisible(false);
+            lastName.setFocusableInTouchMode(false);
+            lastName.setInputType(InputType.TYPE_NULL);
+            lastName.setText(lastName.getText().toString().trim());
 
         }
 
         else if (v1.getId() == R.id.editName){
-                saveNameBtn.setVisibility(v1.VISIBLE);
-                //editNameBtn.setVisibility(v1.INVISIBLE);
+            saveNameBtn.setVisibility(v1.VISIBLE);
+            //editNameBtn.setVisibility(v1.INVISIBLE);
 
-                firstName.setCursorVisible(true);
-                firstName.setFocusableInTouchMode(true);
-                firstName.setInputType(InputType.TYPE_CLASS_TEXT);
-                firstName.requestFocus();
-                firstName.setText("");
-                firstName.setHint("First Name");
+            firstName.setCursorVisible(true);
+            firstName.setFocusableInTouchMode(true);
+            firstName.setInputType(InputType.TYPE_CLASS_TEXT);
+            firstName.requestFocus();
+            firstName.setText("");
+            firstName.setHint("First Name");
 
-                lastName.setCursorVisible(true);
-                lastName.setFocusableInTouchMode(true);
-                lastName.setInputType(InputType.TYPE_CLASS_TEXT);
-                lastName.requestFocus();
-                lastName.setText("");
-                lastName.setHint("Last Name");
+            lastName.setCursorVisible(true);
+            lastName.setFocusableInTouchMode(true);
+            lastName.setInputType(InputType.TYPE_CLASS_TEXT);
+            lastName.requestFocus();
+            lastName.setText("");
+            lastName.setHint("Last Name");
 
-                firstName.setHintTextColor(Color.RED);
-                lastName.setHintTextColor(Color.RED);
+            firstName.setHintTextColor(Color.RED);
+            lastName.setHintTextColor(Color.RED);
 
 
         }
 
         else if (v1.getId() == R.id.saveAddress) {
 
-                InputMethodManager inputManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-                inputManager.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+            InputMethodManager inputManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+            inputManager.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
 
-                FirebaseDatabase database = FirebaseDatabase.getInstance();
-                DatabaseReference myRef = database.getReference();
+            FirebaseDatabase database = FirebaseDatabase.getInstance();
+            DatabaseReference myRef = database.getReference();
 
-                editAddressBtn.setVisibility(v1.VISIBLE);
+            editAddressBtn.setVisibility(v1.VISIBLE);
 
-                myRef.child("Users").child(mAuth.getCurrentUser().getUid()).child("User Info").child("Address Line One").setValue(street1.getText().toString().trim());
-                myRef.child("Users").child(mAuth.getCurrentUser().getUid()).child("User Info").child("Address Line Two").setValue(street2.getText().toString().trim());
-                myRef.child("Users").child(mAuth.getCurrentUser().getUid()).child("User Info").child("City").setValue(City.getText().toString().trim());
-                myRef.child("Users").child(mAuth.getCurrentUser().getUid()).child("User Info").child("State").setValue(State.getText().toString().trim());
-                myRef.child("Users").child(mAuth.getCurrentUser().getUid()).child("User Info").child("ZIP").setValue(Zip.getText().toString().trim());
-                myRef.child("Users").child(mAuth.getCurrentUser().getUid()).child("User Info").child("Country").setValue(Country.getText().toString().trim());
+            myRef.child("Users").child(mAuth.getCurrentUser().getUid()).child("User Info").child("Address Line One").setValue(street1.getText().toString().trim());
+            myRef.child("Users").child(mAuth.getCurrentUser().getUid()).child("User Info").child("Address Line Two").setValue(street2.getText().toString().trim());
+            myRef.child("Users").child(mAuth.getCurrentUser().getUid()).child("User Info").child("City").setValue(City.getText().toString().trim());
+            myRef.child("Users").child(mAuth.getCurrentUser().getUid()).child("User Info").child("State").setValue(State.getText().toString().trim());
+            myRef.child("Users").child(mAuth.getCurrentUser().getUid()).child("User Info").child("ZIP").setValue(Zip.getText().toString().trim());
+            myRef.child("Users").child(mAuth.getCurrentUser().getUid()).child("User Info").child("Country").setValue(Country.getText().toString().trim());
 
-                street1.setCursorVisible(false);
-                street1.setFocusableInTouchMode(false);
-                street1.setInputType(InputType.TYPE_NULL);
+            street1.setCursorVisible(false);
+            street1.setFocusableInTouchMode(false);
+            street1.setInputType(InputType.TYPE_NULL);
 
-                street2.setCursorVisible(false);
-                street2.setFocusableInTouchMode(false);
-                street2.setInputType(InputType.TYPE_NULL);
+            street2.setCursorVisible(false);
+            street2.setFocusableInTouchMode(false);
+            street2.setInputType(InputType.TYPE_NULL);
 
-                City.setCursorVisible(false);
-                City.setFocusableInTouchMode(false);
-                City.setInputType(InputType.TYPE_NULL);
+            City.setCursorVisible(false);
+            City.setFocusableInTouchMode(false);
+            City.setInputType(InputType.TYPE_NULL);
 
-                State.setCursorVisible(false);
-                State.setFocusableInTouchMode(false);
-                State.setInputType(InputType.TYPE_NULL);
+            State.setCursorVisible(false);
+            State.setFocusableInTouchMode(false);
+            State.setInputType(InputType.TYPE_NULL);
 
-                Zip.setCursorVisible(false);
-                Zip.setFocusableInTouchMode(false);
-                Zip.setInputType(InputType.TYPE_NULL);
+            Zip.setCursorVisible(false);
+            Zip.setFocusableInTouchMode(false);
+            Zip.setInputType(InputType.TYPE_NULL);
 
-                Country.setCursorVisible(false);
-                Country.setFocusableInTouchMode(false);
-                Country.setInputType(InputType.TYPE_NULL);
+            Country.setCursorVisible(false);
+            Country.setFocusableInTouchMode(false);
+            Country.setInputType(InputType.TYPE_NULL);
 
         }
 
         else if (v1.getId() == R.id.editAddress){
-                saveAddressBtn.setVisibility(v1.VISIBLE);
+            saveAddressBtn.setVisibility(v1.VISIBLE);
 
-                street1.setCursorVisible(true);
-                street1.setFocusableInTouchMode(true);
-                street1.setInputType(InputType.TYPE_CLASS_TEXT);
-                street1.requestFocus();
-                street1.setText("");
-                street1.setHint("Address Line 1");
-                street1.setHintTextColor(Color.RED);
+            street1.setCursorVisible(true);
+            street1.setFocusableInTouchMode(true);
+            street1.setInputType(InputType.TYPE_CLASS_TEXT);
+            street1.requestFocus();
+            street1.setText("");
+            street1.setHint("Address Line 1");
+            street1.setHintTextColor(Color.RED);
 
-                street2.setCursorVisible(true);
-                street2.setFocusableInTouchMode(true);
-                street2.setInputType(InputType.TYPE_CLASS_TEXT);
-                street2.requestFocus();
-                street2.setText("");
-                street2.setHint("Address Line 2");
-                street2.setHintTextColor(Color.RED);
+            street2.setCursorVisible(true);
+            street2.setFocusableInTouchMode(true);
+            street2.setInputType(InputType.TYPE_CLASS_TEXT);
+            street2.requestFocus();
+            street2.setText("");
+            street2.setHint("Address Line 2");
+            street2.setHintTextColor(Color.RED);
 
-                City.setCursorVisible(true);
-                City.setFocusableInTouchMode(true);
-                City.setInputType(InputType.TYPE_CLASS_TEXT);
-                City.requestFocus();
-                City.setText("");
-                City.setHint("City");
-                City.setHintTextColor(Color.RED);
+            City.setCursorVisible(true);
+            City.setFocusableInTouchMode(true);
+            City.setInputType(InputType.TYPE_CLASS_TEXT);
+            City.requestFocus();
+            City.setText("");
+            City.setHint("City");
+            City.setHintTextColor(Color.RED);
 
-                State.setCursorVisible(true);
-                State.setFocusableInTouchMode(true);
-                State.setInputType(InputType.TYPE_CLASS_TEXT);
-                State.requestFocus();
-                State.setText("");
-                State.setHint("State");
-                State.setHintTextColor(Color.RED);
+            State.setCursorVisible(true);
+            State.setFocusableInTouchMode(true);
+            State.setInputType(InputType.TYPE_CLASS_TEXT);
+            State.requestFocus();
+            State.setText("");
+            State.setHint("State");
+            State.setHintTextColor(Color.RED);
 
-                Zip.setCursorVisible(true);
-                Zip.setFocusableInTouchMode(true);
-                Zip.setInputType(InputType.TYPE_CLASS_TEXT);
-                Zip.requestFocus();
-                Zip.setText("");
-                Zip.setHint("ZIP");
-                Zip.setHintTextColor(Color.RED);
+            Zip.setCursorVisible(true);
+            Zip.setFocusableInTouchMode(true);
+            Zip.setInputType(InputType.TYPE_CLASS_TEXT);
+            Zip.requestFocus();
+            Zip.setText("");
+            Zip.setHint("ZIP");
+            Zip.setHintTextColor(Color.RED);
 
-                Country.setCursorVisible(true);
-                Country.setFocusableInTouchMode(true);
-                Country.setInputType(InputType.TYPE_CLASS_TEXT);
-                Country.requestFocus();
-                Country.setText("");
-                Country.setHint("Country");
-                Country.setHintTextColor(Color.RED);
+            Country.setCursorVisible(true);
+            Country.setFocusableInTouchMode(true);
+            Country.setInputType(InputType.TYPE_CLASS_TEXT);
+            Country.requestFocus();
+            Country.setText("");
+            Country.setHint("Country");
+            Country.setHintTextColor(Color.RED);
         }
 
         else if (v1.getId() == R.id.saveInterests)
@@ -453,4 +468,14 @@ public class Tab4Profile extends Fragment implements View.OnClickListener{
         }
 
     }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == GET_PIC && resultCode == Activity.RESULT_OK && data != null){
+            Uri selectedImage = data.getData();
+            userImageBtn.setImageURI(selectedImage);
+        }
+    }
 }
+

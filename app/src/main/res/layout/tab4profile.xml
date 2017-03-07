@@ -22,25 +22,37 @@
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:orientation="vertical"
+            android:weightSum="1">
 
-            <ImageButton
+            <Button
+                android:id="@+id/logoutBtn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:srcCompat="@android:drawable/ic_input_add"
-                android:padding="100dip"
+                android:text="Log Out" />
+
+            <ImageView
                 android:id="@+id/userImage"
+                android:layout_width="175dp"
+                android:layout_height="175dp"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
+                android:layout_weight="1.70"
+                android:padding="100dip"
+                android:scaleType="fitXY"
+                android:layout_gravity="center_horizontal"
+                app:srcCompat="@android:drawable/ic_input_add"
                 tools:layout_editor_absoluteX="60dp"
                 tools:layout_editor_absoluteY="32dp" />
 
+
             <TextView
-                android:text="Add/Change Photo"
+                android:id="@+id/addPhoto"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20dp"
-                android:id="@+id/addPhoto" />
+                android:text="Add/Change Photo"
+                android:textAlignment="center" />
 
             <LinearLayout
                 android:orientation="horizontal"
