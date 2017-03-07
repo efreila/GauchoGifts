@@ -28,7 +28,6 @@ public class Tab2JoinExchange extends Fragment {
 
     private ListView joinexchanges;
     private FirebaseAuth mAuth;
-    private Integer id;
 
 
     @Override
@@ -43,7 +42,6 @@ public class Tab2JoinExchange extends Fragment {
 
         joinexchanges = (ListView) view.findViewById(R.id.allexchanges);
         mAuth = FirebaseAuth.getInstance();
-        id = 0;
 
         //Establishes connection to Firebase to display the current users current exchanges.
         DatabaseReference databaseReference1 = FirebaseDatabase.getInstance().getReferenceFromUrl(
@@ -64,6 +62,7 @@ public class Tab2JoinExchange extends Fragment {
                         if (snapshot.hasChild(model)) {
                             textView.setTextColor(Color.RED);
                             textView.setText(model + " (enrolled)");
+
                         }
                     }
 

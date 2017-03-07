@@ -26,7 +26,8 @@
         <activity
             android:name=".navheader"
             android:label="@string/title_activity_navheader"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".forgotpassword"></activity>
     </application>
 
 </manifest>

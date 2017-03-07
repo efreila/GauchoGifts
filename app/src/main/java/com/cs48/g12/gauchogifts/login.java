@@ -24,6 +24,7 @@ public class login extends AppCompatActivity {
     private EditText txtEmailLogin;
     private EditText txtPasswordLogin;
     private Button loginBtn;
+    private Button forgotPassword;
     private ProgressDialog mProgress;
 
 
@@ -35,6 +36,7 @@ public class login extends AppCompatActivity {
         txtEmailLogin = (EditText)findViewById(R.id.login_email);
         txtPasswordLogin = (EditText)findViewById(R.id.login_password);
         loginBtn = (Button)findViewById(R.id.login_login);
+        forgotPassword = (Button)findViewById(R.id.forgotpassword);
         mAuth = FirebaseAuth.getInstance();
         mProgress = new ProgressDialog(this);
 
@@ -48,7 +50,14 @@ public class login extends AppCompatActivity {
             }
         });
 
-
+        forgotPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent myIntent = new Intent(login.this, forgotpassword.class);
+                startActivity(myIntent);
+                finish();
+            }
+        });
     }
 
     //Ensures that the user fills out all the information necessary to login.
@@ -71,6 +80,7 @@ public class login extends AppCompatActivity {
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (!task.isSuccessful()) {
                         Toast.makeText(login.this, "Wrong username/password", Toast.LENGTH_SHORT).show();
+                        mProgress.dismiss();
 
                     } else {
                         checkIfEmailVerified();
