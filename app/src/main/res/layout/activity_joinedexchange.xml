@@ -18,7 +18,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/geTitle"
+                android:id="@+id/geTitleJ"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
@@ -31,7 +31,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/geDeadline"
+                android:id="@+id/geDeadlineJ"
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
                 android:layout_marginEnd="16dp"
@@ -45,7 +45,7 @@
                 tools:layout_constraintLeft_creator="1" />
 
             <TextView
-                android:id="@+id/geDescripton"
+                android:id="@+id/geDescriptonJ"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
@@ -58,7 +58,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/geDeadline" />
 
             <TextView
-                android:id="@+id/title"
+                android:id="@+id/titleJ"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingBottom="20dp"
@@ -69,14 +69,14 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/question1"
+                android:id="@+id/question1J"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Notes for your gifter"
                 android:textAlignment="center" />
 
             <EditText
-                android:id="@+id/q1Ans"
+                android:id="@+id/q1AnsJ"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -85,14 +85,14 @@
                 android:textSize="14sp" />
 
             <TextView
-                android:id="@+id/question2"
+                android:id="@+id/question2J"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Question 2"
                 android:textAlignment="center" />
 
             <EditText
-                android:id="@+id/q2Ans"
+                android:id="@+id/q2AnsJ"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -101,14 +101,14 @@
                 android:textSize="14sp" />
 
             <TextView
-                android:id="@+id/question3"
+                android:id="@+id/question3J"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Question 3"
                 android:textAlignment="center" />
 
             <EditText
-                android:id="@+id/q3Ans"
+                android:id="@+id/q3AnsJ"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -117,14 +117,14 @@
                 android:textSize="14sp" />
 
             <TextView
-                android:id="@+id/question4"
+                android:id="@+id/question4J"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Question 4"
                 android:textAlignment="center" />
 
             <EditText
-                android:id="@+id/q4Ans"
+                android:id="@+id/q4AnsJ"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -133,14 +133,14 @@
                 android:textSize="14sp" />
 
             <TextView
-                android:id="@+id/question5"
+                android:id="@+id/question5J"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Question 5"
                 android:textAlignment="center" />
 
             <EditText
-                android:id="@+id/q5Ans"
+                android:id="@+id/q5AnsJ"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -149,14 +149,14 @@
                 android:textSize="14sp" />
 
             <TextView
-                android:id="@+id/question6"
+                android:id="@+id/question6J"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Question 6"
                 android:textAlignment="center" />
 
             <EditText
-                android:id="@+id/q6Ans"
+                android:id="@+id/q6AnsJ"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -165,11 +165,11 @@
                 android:textSize="14sp" />
 
             <Button
-                android:id="@+id/joinBtn"
+                android:id="@+id/quitBtn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
-                android:text="Join Gift Exchange"
+                android:text="Quit Gift Exchange"
                 app:layout_constraintTop_toBottomOf="@+id/geDescripton"
                 tools:layout_editor_absoluteX="8dp" />
         </LinearLayout>

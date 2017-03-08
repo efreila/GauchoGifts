@@ -46,7 +46,7 @@ public class Tab1YourExchanges extends Fragment {
             protected void populateView(View v, String model, int position) {
 
                 final String gemodel = model;
-                final Intent myIntent = new Intent(getActivity(), giftexchange.class);
+                final Intent myIntent = new Intent(getActivity(), joinedexchange.class);
 
                 TextView textView = (TextView) v.findViewById(android.R.id.text1);
                 textView.setText(model);
@@ -58,6 +58,82 @@ public class Tab1YourExchanges extends Fragment {
                         Firebase geTitle = new Firebase("https://gauchogifts.firebaseio.com/Exchanges/" + gemodel + "/Title");
                         Firebase geDeadline = new Firebase("https://gauchogifts.firebaseio.com/Exchanges/" + gemodel + "/Deadline");
                         Firebase geDescription = new Firebase("https://gauchogifts.firebaseio.com/Exchanges/" + gemodel + "/Description");
+                        Firebase geQuestionTwo = new Firebase("https://gauchogifts.firebaseio.com/Exchanges/" + gemodel + "/Questions/Question1");
+                        Firebase geQuestionThree = new Firebase("https://gauchogifts.firebaseio.com/Exchanges/" + gemodel + "/Questions/Question2");
+                        Firebase geQuestionFour = new Firebase("https://gauchogifts.firebaseio.com/Exchanges/" + gemodel + "/Questions/Question3");
+                        Firebase geQuestionFive = new Firebase("https://gauchogifts.firebaseio.com/Exchanges/" + gemodel + "/Questions/Question4");
+                        Firebase geQuestionSix = new Firebase("https://gauchogifts.firebaseio.com/Exchanges/" + gemodel + "/Questions/Question5");
+
+                        geQuestionTwo.addValueEventListener(new com.firebase.client.ValueEventListener() {
+                            @Override
+                            public void onDataChange(com.firebase.client.DataSnapshot dataSnapshot) {
+                                String gequestionone = dataSnapshot.getValue(String.class);
+                                myIntent.putExtra("QuestionOne", gequestionone);
+                                getActivity().startActivity(myIntent);
+                            }
+
+                            @Override
+                            public void onCancelled(FirebaseError firebaseError) {
+
+                            }
+                        });
+
+                        geQuestionThree.addValueEventListener(new com.firebase.client.ValueEventListener() {
+                            @Override
+                            public void onDataChange(com.firebase.client.DataSnapshot dataSnapshot) {
+                                String gequestiontwo = dataSnapshot.getValue(String.class);
+                                myIntent.putExtra("QuestionTwo", gequestiontwo);
+                                getActivity().startActivity(myIntent);
+                            }
+
+                            @Override
+                            public void onCancelled(FirebaseError firebaseError) {
+
+                            }
+                        });
+
+                        geQuestionFour.addValueEventListener(new com.firebase.client.ValueEventListener() {
+                            @Override
+                            public void onDataChange(com.firebase.client.DataSnapshot dataSnapshot) {
+                                String gequestionthree = dataSnapshot.getValue(String.class);
+                                myIntent.putExtra("QuestionThree", gequestionthree);
+                                getActivity().startActivity(myIntent);
+                            }
+
+                            @Override
+                            public void onCancelled(FirebaseError firebaseError) {
+
+                            }
+                        });
+
+                        geQuestionFive.addValueEventListener(new com.firebase.client.ValueEventListener() {
+                            @Override
+                            public void onDataChange(com.firebase.client.DataSnapshot dataSnapshot) {
+                                String gequestionfour = dataSnapshot.getValue(String.class);
+                                myIntent.putExtra("QuestionFour", gequestionfour);
+                                getActivity().startActivity(myIntent);
+                            }
+
+                            @Override
+                            public void onCancelled(FirebaseError firebaseError) {
+
+                            }
+                        });
+
+                        geQuestionSix.addValueEventListener(new com.firebase.client.ValueEventListener() {
+                            @Override
+                            public void onDataChange(com.firebase.client.DataSnapshot dataSnapshot) {
+                                String gequestionfive = dataSnapshot.getValue(String.class);
+                                myIntent.putExtra("QuestionFive", gequestionfive);
+                                getActivity().startActivity(myIntent);
+                            }
+
+                            @Override
+                            public void onCancelled(FirebaseError firebaseError) {
+
+                            }
+                        });
+
 
                         geTitle.addValueEventListener(new com.firebase.client.ValueEventListener() {
                             @Override

@@ -46,14 +46,13 @@ public class Tab2JoinExchange extends Fragment {
         //Establishes connection to Firebase to display the current users current exchanges.
         DatabaseReference databaseReference1 = FirebaseDatabase.getInstance().getReferenceFromUrl(
                 "https://gauchogifts.firebaseio.com/Exchanges/AllExchanges");
-
         final FirebaseListAdapter<String> firebaseListAdapter = new FirebaseListAdapter<String>(
                 getActivity(), String.class, android.R.layout.simple_list_item_1, databaseReference1) {
             @Override
             protected void populateView(final View v, final String model, final int position) {
                 final String gemodel = model;
                 final Intent myIntent1 = new Intent(getActivity(), giftexchange.class);
-
+                final Intent myIntent2 = new Intent(getActivity(), joinedexchange.class);
                 final TextView textView = (TextView) v.findViewById(android.R.id.text1);
                 DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
                 rootRef.child("Users").child(mAuth.getCurrentUser().getUid()).child("Current Exchanges").addListenerForSingleValueEvent(new ValueEventListener() {
@@ -62,6 +61,9 @@ public class Tab2JoinExchange extends Fragment {
                         if (snapshot.hasChild(model)) {
                             textView.setTextColor(Color.RED);
                             textView.setText(model + " (enrolled)");
+                            textView.setOnClickListener(null);
+
+//                            Toast.makeText(getActivity(), "You're already enrolled in this exchange", Toast.LENGTH_SHORT).show();
 
                         }
                     }
@@ -76,7 +78,6 @@ public class Tab2JoinExchange extends Fragment {
                 textView.setText(model);
                 textView.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View view) {
-
                         //Passes the information retrieved from the URL above to the next activity. This is needed to display the correct information
                         //based on the exchange chosen.
                         Firebase geTitle = new Firebase("https://gauchogifts.firebaseio.com/Exchanges/" + gemodel + "/Title");

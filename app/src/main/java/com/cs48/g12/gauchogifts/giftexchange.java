@@ -89,11 +89,13 @@ public class giftexchange extends AppCompatActivity {
         questionSix.setText(exQuestionFive);
 
         Button join = (Button)findViewById(R.id.joinBtn);
+        //if before deadline
         join.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 checkFields();
             }
         });
+        //else (after deadline)
 
 //        mAuthListener = new FirebaseAuth.AuthStateListener() {
 //            @Override
