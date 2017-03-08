@@ -34,7 +34,14 @@ public class intro extends AppCompatActivity {
     }
     protected void sendMessage(View v)
     {
-        Intent intent = new Intent(getApplicationContext(), info.class);
-        startActivity(intent);
+        //relaunches the welcome slides
+        SlideManager prefManager = new SlideManager(getApplicationContext());
+
+        // make first time launch TRUE
+        prefManager.setFirstTimeLaunch(true);
+
+        startActivity(new Intent(intro.this, welcomeslides.class));
+        finish();
+
     }
 }
