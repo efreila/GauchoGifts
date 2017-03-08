@@ -32,6 +32,7 @@ import android.os.Environment;
 import android.annotation.TargetApi;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.BitmapDrawable;
+import android.content.res.Resources;
 
 import java.io.*;
 
@@ -47,7 +48,7 @@ import com.google.firebase.database.FirebaseDatabase;
 public class Tab4Profile extends Fragment implements View.OnClickListener{
 
     private static final int GET_PIC = 1;
-    ImageView userImageBtn;
+    ImageButton userImageBtn;
     String selectedImagePath;
     TextView firstName, lastName, street1, street2, City, State, Zip, Credits, Country;
     EditText interestInput;
@@ -57,7 +58,6 @@ public class Tab4Profile extends Fragment implements View.OnClickListener{
     private FirebaseAuth.AuthStateListener mAuthListener;
     private BottomNavigationView bottomNavigationView;
     Button saveNameBtn, editNameBtn, saveAddressBtn, editAddressBtn, saveInterestBtn, editInterestBtn;
-
 
 
     @Override
@@ -75,7 +75,7 @@ public class Tab4Profile extends Fragment implements View.OnClickListener{
 
 
         mAuth = FirebaseAuth.getInstance();
-        userImageBtn = (ImageView) view.findViewById(R.id.userImage);
+        userImageBtn = (ImageButton) view.findViewById(R.id.userImage);
         userImageBtn.setOnClickListener(this);
 
 
@@ -294,6 +294,23 @@ public class Tab4Profile extends Fragment implements View.OnClickListener{
             }
         });
 
+        /*
+        mRef = new Firebase("https://gauchogifts.firebaseio.com/Users/" + uid + "/User Info/Photo");
+
+        mRef.addValueEventListener(new com.firebase.client.ValueEventListener() {
+            @Override
+            public void onDataChange(com.firebase.client.DataSnapshot dataSnapshot) {
+                Uri profPic = dataSnapshot.getValue(Uri.class);
+
+                userImageBtn.setImageURI(profPic);
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+
+            }
+        }); */
+
 
 
     }
@@ -303,8 +320,13 @@ public class Tab4Profile extends Fragment implements View.OnClickListener{
     @Override
     public void onClick(View v1) {
         if (v1.getId() == R.id.userImage){
-            Intent galleryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+            FirebaseDatabase database = FirebaseDatabase.getInstance();
+            DatabaseReference myRef = database.getReference();
+
+            Intent galleryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
             startActivityForResult(galleryIntent, GET_PIC);
+
+            myRef.child("Users").child(mAuth.getCurrentUser().getUid()).child("User Info").child("Photo").setValue(userImageBtn.getImageAlpha());
         }
         else if (v1.getId() == R.id.saveName)
         {
@@ -473,9 +495,46 @@ public class Tab4Profile extends Fragment implements View.OnClickListener{
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == GET_PIC && resultCode == Activity.RESULT_OK && data != null){
-            Uri selectedImage = data.getData();
-            userImageBtn.setImageURI(selectedImage);
+
+            userImageBtn.setImageBitmap(decodeSampledBitmapFromResource(getResources(), R.id.userImage, 100, 100));
         }
+    }
+
+    public static Bitmap decodeSampledBitmapFromResource(Resources res, int resId, int reqWidth, int reqHeight) {
+
+        // First decode with inJustDecodeBounds=true to check dimensions
+        final BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inJustDecodeBounds = true;
+        BitmapFactory.decodeResource(res, resId, options);
+
+        // Calculate inSampleSize
+        options.inSampleSize = calculateInSampleSize(options, reqWidth, reqHeight);
+
+        // Decode bitmap with inSampleSize set
+        options.inJustDecodeBounds = false;
+        return BitmapFactory.decodeResource(res, resId, options);
+    }
+
+    public static int calculateInSampleSize (BitmapFactory.Options options, int reqWidth, int reqHeight) {
+        // Raw height and width of image
+        final int height = options.outHeight;
+        final int width = options.outWidth;
+        int inSampleSize = 1;
+
+        if (height > reqHeight || width > reqWidth) {
+
+            final int halfHeight = height / 2;
+            final int halfWidth = width / 2;
+
+            // Calculate the largest inSampleSize value that is a power of 2 and keeps both
+            // height and width larger than the requested height and width.
+            while ((halfHeight / inSampleSize) >= reqHeight
+                    && (halfWidth / inSampleSize) >= reqWidth) {
+                inSampleSize *= 2;
+            }
+        }
+
+        return inSampleSize;
     }
 }
 
