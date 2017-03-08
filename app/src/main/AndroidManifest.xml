@@ -28,7 +28,8 @@
             android:label="@string/title_activity_navheader"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".forgotpassword" />
-        <activity android:name=".joinedexchange"></activity>
+        <activity android:name=".welcomeslides" />
+        <activity android:name=".SlideManager" />
     </application>
 
 </manifest>
