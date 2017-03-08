@@ -30,6 +30,7 @@
         <activity android:name=".forgotpassword" />
         <activity android:name=".welcomeslides" />
         <activity android:name=".SlideManager" />
+        <activity android:name=".joinedexchange" />
     </application>
 
 </manifest>
