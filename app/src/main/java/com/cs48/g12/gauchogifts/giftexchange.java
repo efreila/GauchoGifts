@@ -46,7 +46,6 @@ public class giftexchange extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_giftexchange);
 
-
         acTitle = (TextView)findViewById(R.id.geTitle);
         acDeadline = (TextView)findViewById(R.id.geDeadline);
         acDescription = (TextView)findViewById(R.id.geDescripton);
@@ -63,10 +62,7 @@ public class giftexchange extends AppCompatActivity {
         questionFive = (TextView)findViewById(R.id.question5);
         questionSix = (TextView)findViewById(R.id.question6);
 
-
-
         Bundle geinfo = getIntent().getExtras();
-
         //When the activity is loaded the specific title of the exchange chosen is displayed
         String exTitle = geinfo.getString("Title");
         acTitle.setText(exTitle);
@@ -114,6 +110,7 @@ public class giftexchange extends AppCompatActivity {
 //            }
 //        };
 
+        //Makes sure keyboard doesn't pop up when window loads
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
     }
@@ -183,7 +180,6 @@ public class giftexchange extends AppCompatActivity {
         Intent myIntent = new Intent(giftexchange.this, navheader.class);
         startActivity(myIntent);
     }
-
 
 
     @Override
