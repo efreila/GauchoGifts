@@ -126,7 +126,7 @@ public class navheader extends AppCompatActivity {
                 case 1:
                     return "Join Exchange";
                 case 2:
-                    return "Help";
+                    return "FAQ";
                 case 3:
                     return "Profile";
             }

@@ -106,6 +106,7 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Button"
         android:layout_marginTop="85dp"
         android:layout_alignTop="@+id/answer5"
+        android:paddingBottom="200dp"
         android:layout_alignParentStart="true" />
 
     <TextView android:id="@+id/answer6"
@@ -120,7 +121,7 @@
 
 
     <TextView android:id="@+id/answer5"
-        android:text="You will be rematched with a new Santa, and your failed Gaucho Santa will be ban from entering into future gift exchanges."
+        android:text="You will be rematched with a new Santa, and your failed Gaucho Santa will be banned from entering into future gift exchanges."
         android:textSize="15sp"
         android:textColor="#000000"
         android:layout_width="match_parent"
@@ -162,15 +163,6 @@
         android:layout_below="@+id/question2"
         android:layout_alignParentStart="true" />
 
-    <!--<ImageButton-->
-    <!--android:id="@+id/button3"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:src="@android:drawable/arrow_down_float"-->
-    <!--android:layout_marginLeft="280dp"-->
-    <!--android:layout_marginRight="120dp"-->
-    <!--android:layout_alignBottom="@+id/question3"-->
-    <!--android:layout_alignTop="@+id/question3" />-->
 
     </RelativeLayout>
 </ScrollView>
