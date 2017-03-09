@@ -1,14 +1,24 @@
 package com.cs48.g12.gauchogifts;
 
 import android.content.Intent;
+import android.icu.text.DateFormat;
+import android.icu.text.SimpleDateFormat;
+import android.icu.util.Calendar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import java.text.ParseException;
+import java.util.Date;
+
 public class intro extends AppCompatActivity {
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +41,8 @@ public class intro extends AppCompatActivity {
                 startActivityForResult(myIntent1, 0);
             }
         });
+
+        Toast.makeText(intro.this, "", Toast.LENGTH_SHORT).show();
     }
     protected void sendMessage(View v)
     {

@@ -1,6 +1,8 @@
 package com.cs48.g12.gauchogifts;
 
 import android.content.Intent;
+import android.icu.text.SimpleDateFormat;
+import android.icu.util.Calendar;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -17,10 +19,14 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.text.ParseException;
+import java.util.Date;
+
 
 public class Tab1YourExchanges extends Fragment {
 
     private ListView joinedexchanges;
+    private Calendar c;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -33,6 +39,8 @@ public class Tab1YourExchanges extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         joinedexchanges = (ListView) view.findViewById(R.id.Exchanges);
+        c = Calendar.getInstance();
+
 
         String uID = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
@@ -52,6 +60,26 @@ public class Tab1YourExchanges extends Fragment {
                 textView.setText(model);
                 textView.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View view) {
+
+                        try {
+                            SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy");
+
+                            String formattedDate = df.format(c.getTime());
+                            Date date1 = df.parse(formattedDate);
+
+                            String str2 = "03/05/2017";
+                            Date date2 = df.parse(str2);
+
+                            if (date1.after(date2))
+                            {
+                                System.out.println("date2 is Greater than my date1");
+                            }
+
+                        }
+
+                        catch (ParseException e1){
+                            e1.printStackTrace();
+                        }
 
                         //Passes the information retrieved from the URL above to the next activity. This is needed to display the correct information
                         //based on the exchange chosen.
