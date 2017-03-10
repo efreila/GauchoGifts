@@ -23,13 +23,10 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:weightSum="1">
+            android:weightSum="1"
+            android:paddingBottom="100dp">
 
-            <Button
-                android:id="@+id/logoutBtn"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Log Out" />
+
 
             <ImageButton
                 android:id="@+id/userImage"
@@ -313,13 +310,19 @@
 
             <EditText
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
+                android:layout_height="wrap_content"
                 android:inputType="textMultiLine"
                 android:ems="10"
                 android:id="@+id/interestInput"
                 android:gravity="top|left"
+                android:paddingBottom="100dp"
                 />
 
+            <Button
+                android:id="@+id/logoutBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Log Out" />
 
         </LinearLayout>
     </ScrollView>
