@@ -228,6 +228,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Notes for your gifter"
+                android:paddingBottom="10dp"
                 android:textAlignment="center" />
 
             <TextView
@@ -237,6 +238,7 @@
                 android:ems="10"
                 android:hint="Answer:"
                 android:inputType="textMultiLine"
+                android:paddingBottom="10dp"
                 android:textSize="14sp" />
 
             <TextView
@@ -244,6 +246,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Question 2"
+                android:paddingBottom="10dp"
                 android:textAlignment="center" />
 
             <TextView
@@ -253,6 +256,7 @@
                 android:ems="10"
                 android:hint="Answer:"
                 android:inputType="textMultiLine"
+                android:paddingBottom="10dp"
                 android:textSize="14sp" />
 
             <TextView
@@ -260,6 +264,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Question 3"
+                android:paddingBottom="10dp"
                 android:textAlignment="center" />
 
             <TextView
@@ -269,6 +274,7 @@
                 android:ems="10"
                 android:hint="Answer:"
                 android:inputType="textMultiLine"
+                android:paddingBottom="10dp"
                 android:textSize="14sp" />
 
             <TextView
@@ -276,6 +282,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Question 4"
+                android:paddingBottom="10dp"
                 android:textAlignment="center" />
 
             <TextView
@@ -285,6 +292,7 @@
                 android:ems="10"
                 android:hint="Answer:"
                 android:inputType="textMultiLine"
+                android:paddingBottom="10dp"
                 android:textSize="14sp" />
 
             <TextView
@@ -292,6 +300,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Question 5"
+                android:paddingBottom="10dp"
                 android:textAlignment="center" />
 
             <TextView
@@ -301,6 +310,7 @@
                 android:ems="10"
                 android:hint="Answer:"
                 android:inputType="textMultiLine"
+                android:paddingBottom="10dp"
                 android:textSize="14sp" />
 
             <TextView
@@ -308,6 +318,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Question 6"
+                android:paddingBottom="10dp"
                 android:textAlignment="center" />
 
             <TextView
@@ -317,6 +328,7 @@
                 android:ems="10"
                 android:hint="Answer:"
                 android:inputType="textMultiLine"
+                android:paddingBottom="10dp"
                 android:textSize="14sp"
                 />
 

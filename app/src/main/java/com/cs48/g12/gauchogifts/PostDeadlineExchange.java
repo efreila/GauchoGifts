@@ -28,6 +28,7 @@ public class PostDeadlineExchange extends AppCompatActivity implements View.OnCl
 
     Button complete, goBack;
     TextView firstName, lastName, street1, street2, City, State, Zip, Credits, Country, interestInput, q1Ans, q2Ans, q3Ans, q4Ans, q5Ans, q6Ans;
+    TextView q1text, q2text, q3text, q4text, q5text, q6text;
     private TextView saveText;
     private FirebaseAuth mAuth;
     private Firebase mRef;
@@ -55,6 +56,13 @@ public class PostDeadlineExchange extends AppCompatActivity implements View.OnCl
         q4Ans = (TextView) findViewById(R.id.q4AnsJ);
         q5Ans = (TextView) findViewById(R.id.q5AnsJ);
         q6Ans = (TextView) findViewById(R.id.q6AnsJ);
+
+        q1text = (TextView) findViewById(R.id.question1J);
+        q2text = (TextView) findViewById(R.id.question2J);
+        q3text = (TextView) findViewById(R.id.question3J);
+        q4text = (TextView) findViewById(R.id.question4J);
+        q5text = (TextView) findViewById(R.id.question5J);
+        q6text = (TextView) findViewById(R.id.question6J);
 
         goBack = (Button) findViewById(R.id.backBtn);
         goBack.setOnClickListener(this);
@@ -209,6 +217,97 @@ public class PostDeadlineExchange extends AppCompatActivity implements View.OnCl
                 String interest = dataSnapshot.getValue(String.class);
 
                 interestInput.setText(interest);
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+
+            }
+        });
+
+        //Loads question 1.
+        mRef = new Firebase("https://gauchogifts.firebaseio.com/Exchanges/" + exchangeTitle + "/Questions/Question1");
+        mRef.addValueEventListener(new com.firebase.client.ValueEventListener() {
+            @Override
+            public void onDataChange(com.firebase.client.DataSnapshot dataSnapshot) {
+                String question1 = dataSnapshot.getValue(String.class);
+
+                q1text.setText(question1);
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+
+            }
+        });
+
+        mRef = new Firebase("https://gauchogifts.firebaseio.com/Exchanges/" + exchangeTitle + "/Questions/Question2");
+        mRef.addValueEventListener(new com.firebase.client.ValueEventListener() {
+            @Override
+            public void onDataChange(com.firebase.client.DataSnapshot dataSnapshot) {
+                String question2 = dataSnapshot.getValue(String.class);
+
+                q2text.setText(question2);
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+
+            }
+        });
+
+        mRef = new Firebase("https://gauchogifts.firebaseio.com/Exchanges/" + exchangeTitle + "/Questions/Question3");
+        mRef.addValueEventListener(new com.firebase.client.ValueEventListener() {
+            @Override
+            public void onDataChange(com.firebase.client.DataSnapshot dataSnapshot) {
+                String question3 = dataSnapshot.getValue(String.class);
+
+                q3text.setText(question3);
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+
+            }
+        });
+
+        mRef = new Firebase("https://gauchogifts.firebaseio.com/Exchanges/" + exchangeTitle + "/Questions/Question4");
+        mRef.addValueEventListener(new com.firebase.client.ValueEventListener() {
+            @Override
+            public void onDataChange(com.firebase.client.DataSnapshot dataSnapshot) {
+                String question4 = dataSnapshot.getValue(String.class);
+
+                q4text.setText(question4);
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+
+            }
+        });
+
+        mRef = new Firebase("https://gauchogifts.firebaseio.com/Exchanges/" + exchangeTitle + "/Questions/Question5");
+        mRef.addValueEventListener(new com.firebase.client.ValueEventListener() {
+            @Override
+            public void onDataChange(com.firebase.client.DataSnapshot dataSnapshot) {
+                String question5 = dataSnapshot.getValue(String.class);
+
+                q5text.setText(question5);
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+
+            }
+        });
+
+        mRef = new Firebase("https://gauchogifts.firebaseio.com/Exchanges/" + exchangeTitle + "/Questions/Question6");
+        mRef.addValueEventListener(new com.firebase.client.ValueEventListener() {
+            @Override
+            public void onDataChange(com.firebase.client.DataSnapshot dataSnapshot) {
+                String question6 = dataSnapshot.getValue(String.class);
+
+                q6text.setText(question6);
             }
 
             @Override
