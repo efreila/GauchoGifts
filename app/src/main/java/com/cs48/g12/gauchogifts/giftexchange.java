@@ -99,7 +99,7 @@ public class giftexchange extends AppCompatActivity {
         join.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 checkFields();
-                addCredit();
+                changeCredit();
             }
         });
         //else (after deadline)
@@ -124,7 +124,8 @@ public class giftexchange extends AppCompatActivity {
 
     }
 
-    private void addCredit() {
+    //subtracts 1 from current user credits when joins gift exchange
+    private void changeCredit() {
         String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
         mRef = new Firebase("https://gauchogifts.firebaseio.com/Users/" + uid + "/User Info/Credits");
 
@@ -135,8 +136,9 @@ public class giftexchange extends AppCompatActivity {
 
 
                 if(creditInt != 0){
-                    creditInt += 1;
+                    joinGiftExchange();
 
+                    creditInt -= 1;
                     FirebaseDatabase database = FirebaseDatabase.getInstance();
                     DatabaseReference myRef = database.getReference();
                     myRef.child("Users").child(mAuth.getCurrentUser().getUid()).child("User Info").child("Credits").setValue(creditInt);
@@ -183,7 +185,7 @@ public class giftexchange extends AppCompatActivity {
         }
 
         else
-            joinGiftExchange();
+            changeCredit();
     }
 
 //    @Override
