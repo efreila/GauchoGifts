@@ -68,7 +68,6 @@
                         android:hint="First Name"
                         android:inputType="textPersonName"
                         android:textSize="20sp"
-                        app:layout_constraintRight_toRightOf="@+id/userImage"
                         />
 
 
