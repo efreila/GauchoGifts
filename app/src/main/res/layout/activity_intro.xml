@@ -28,7 +28,7 @@
         android:layout_marginBottom="8dp" />
 
     <Button
-        android:text="Info"
+        android:text="About GauchoGifts"
         android:layout_width="230dp"
         android:layout_height="wrap_content"
         android:id="@+id/intro_info"

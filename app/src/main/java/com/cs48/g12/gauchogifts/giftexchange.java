@@ -15,15 +15,20 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.firebase.client.Firebase;
+import com.firebase.client.FirebaseError;
 import com.google.android.gms.vision.text.Text;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.ChildEventListener;
 
 
 public class giftexchange extends AppCompatActivity {
 
+    int creditNew;
     private TextView acTitle;
     private TextView acDeadline;
     private TextView acDescription;
@@ -39,6 +44,7 @@ public class giftexchange extends AppCompatActivity {
     private TextView questionFive;
     private TextView questionSix;
     private FirebaseAuth mAuth;
+    private Firebase mRef;
     private FirebaseAuth.AuthStateListener mAuthListener;
 
     @Override
@@ -93,6 +99,7 @@ public class giftexchange extends AppCompatActivity {
         join.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 checkFields();
+                addCredit();
             }
         });
         //else (after deadline)
@@ -116,6 +123,38 @@ public class giftexchange extends AppCompatActivity {
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
     }
+
+    private void addCredit() {
+        String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        mRef = new Firebase("https://gauchogifts.firebaseio.com/Users/" + uid + "/User Info/Credits");
+
+        mRef.addListenerForSingleValueEvent(new com.firebase.client.ValueEventListener() {
+            @Override
+            public void onDataChange(com.firebase.client.DataSnapshot dataSnapshot) {
+                Integer creditInt = dataSnapshot.getValue(Integer.class);
+
+
+                if(creditInt != 0){
+                    creditInt += 1;
+
+                    FirebaseDatabase database = FirebaseDatabase.getInstance();
+                    DatabaseReference myRef = database.getReference();
+                    myRef.child("Users").child(mAuth.getCurrentUser().getUid()).child("User Info").child("Credits").setValue(creditInt);
+                }
+
+                else{
+                    Toast.makeText(giftexchange.this, "You do not have enough credits to join this gift exchange.", Toast.LENGTH_LONG).show();
+                }
+
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+
+            }
+        });
+    }
+
 
     private void checkFields() {
         if(TextUtils.isEmpty(questionTwoAnswer.getText().toString().trim())) {
