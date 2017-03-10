@@ -12,14 +12,16 @@ import android.widget.EditText;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+import java.util.ArrayList;
 
-
+import com.google.firebase.database.ValueEventListener;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.google.android.gms.vision.text.Text;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class PostDeadlineExchange extends AppCompatActivity implements View.OnClickListener {
@@ -61,9 +63,12 @@ public class PostDeadlineExchange extends AppCompatActivity implements View.OnCl
 
         //Loads the giftee's first name.
 
+
+
         Bundle geinfo = getIntent().getExtras();
         String exchangeTitle = geinfo.getString("Title");
-        String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        String uid = "8qp8fkR8VJfrbcKE6b82mfXPNYw2";
+                //FirebaseAuth.getInstance().getCurrentUser().getUid();
 
 
         mRef = new Firebase("https://gauchogifts.firebaseio.com/Users/" + uid + "/User Info/First Name");
@@ -311,6 +316,8 @@ public class PostDeadlineExchange extends AppCompatActivity implements View.OnCl
         });
     }
 
+
+
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.exchangeComplete) {
@@ -365,4 +372,6 @@ public class PostDeadlineExchange extends AppCompatActivity implements View.OnCl
         startActivity(myIntent);
 
     }
+
+
 }
