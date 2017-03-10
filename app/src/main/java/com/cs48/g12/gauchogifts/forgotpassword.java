@@ -55,6 +55,10 @@ public class forgotpassword extends AppCompatActivity {
         forgotPasswordResetBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(forgotpass_email.getText().toString().trim().length() < 6) {
+                    Toast.makeText(forgotpassword.this, "Password must be at least 6 characters.", Toast.LENGTH_LONG).show();
+                }
+
                 String email = forgotpass_email.getText().toString().trim();
                 mProgress.setMessage("Please wait...");
                 mProgress.show();

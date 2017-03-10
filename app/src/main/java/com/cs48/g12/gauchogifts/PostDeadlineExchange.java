@@ -60,8 +60,11 @@ public class PostDeadlineExchange extends AppCompatActivity implements View.OnCl
         complete.setOnClickListener(this); // calling onClick() method
 
         //Loads the giftee's first name.
+
+        Bundle geinfo = getIntent().getExtras();
+        String exchangeTitle = geinfo.getString("Title");
         String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        String currentExchange = "Animals";
+
 
         mRef = new Firebase("https://gauchogifts.firebaseio.com/Users/" + uid + "/User Info/First Name");
 
@@ -211,7 +214,7 @@ public class PostDeadlineExchange extends AppCompatActivity implements View.OnCl
 
 
         //Loads giftee answer to question 1.
-        mRef = new Firebase("https://gauchogifts.firebaseio.com/Exchanges/" + currentExchange + "/Enrolled Users/" + uid + "/Questions/General Info");
+        mRef = new Firebase("https://gauchogifts.firebaseio.com/Exchanges/" + exchangeTitle + "/Enrolled Users/" + uid + "/Questions/General Info");
         mRef.addValueEventListener(new com.firebase.client.ValueEventListener() {
             @Override
             public void onDataChange(com.firebase.client.DataSnapshot dataSnapshot) {
@@ -227,7 +230,7 @@ public class PostDeadlineExchange extends AppCompatActivity implements View.OnCl
         });
 
         //Loads giftee answer to question 2.
-        mRef = new Firebase("https://gauchogifts.firebaseio.com/Exchanges/" + currentExchange + "/Enrolled Users/" + uid + "/Questions/Question1");
+        mRef = new Firebase("https://gauchogifts.firebaseio.com/Exchanges/" + exchangeTitle + "/Enrolled Users/" + uid + "/Questions/Question1");
         mRef.addValueEventListener(new com.firebase.client.ValueEventListener() {
             @Override
             public void onDataChange(com.firebase.client.DataSnapshot dataSnapshot) {
@@ -243,7 +246,7 @@ public class PostDeadlineExchange extends AppCompatActivity implements View.OnCl
         });
 
         //Loads giftee answer to question 3.
-        mRef = new Firebase("https://gauchogifts.firebaseio.com/Exchanges/" + currentExchange + "/Enrolled Users/" + uid + "/Questions/Question2");
+        mRef = new Firebase("https://gauchogifts.firebaseio.com/Exchanges/" + exchangeTitle + "/Enrolled Users/" + uid + "/Questions/Question2");
         mRef.addValueEventListener(new com.firebase.client.ValueEventListener() {
             @Override
             public void onDataChange(com.firebase.client.DataSnapshot dataSnapshot) {
@@ -259,7 +262,7 @@ public class PostDeadlineExchange extends AppCompatActivity implements View.OnCl
         });
 
         //Loads giftee answer to question 4.
-        mRef = new Firebase("https://gauchogifts.firebaseio.com/Exchanges/" + currentExchange + "/Enrolled Users/" + uid + "/Questions/Question3");
+        mRef = new Firebase("https://gauchogifts.firebaseio.com/Exchanges/" + exchangeTitle + "/Enrolled Users/" + uid + "/Questions/Question3");
         mRef.addValueEventListener(new com.firebase.client.ValueEventListener() {
             @Override
             public void onDataChange(com.firebase.client.DataSnapshot dataSnapshot) {
@@ -275,13 +278,13 @@ public class PostDeadlineExchange extends AppCompatActivity implements View.OnCl
         });
 
         //Loads giftee answer to question 5.
-        mRef = new Firebase("https://gauchogifts.firebaseio.com/Exchanges/" + currentExchange + "/Enrolled Users/" + uid + "/Questions/Question4");
+        mRef = new Firebase("https://gauchogifts.firebaseio.com/Exchanges/" + exchangeTitle + "/Enrolled Users/" + uid + "/Questions/Question4");
         mRef.addValueEventListener(new com.firebase.client.ValueEventListener() {
             @Override
             public void onDataChange(com.firebase.client.DataSnapshot dataSnapshot) {
                 String q5 = dataSnapshot.getValue(String.class);
 
-                q1Ans.setText(q5);
+                q5Ans.setText(q5);
             }
 
             @Override
@@ -291,7 +294,7 @@ public class PostDeadlineExchange extends AppCompatActivity implements View.OnCl
         });
 
         //Loads giftee answer to question 6.
-        mRef = new Firebase("https://gauchogifts.firebaseio.com/Exchanges/" + currentExchange + "/Enrolled Users/" + uid + "/Questions/Question5");
+        mRef = new Firebase("https://gauchogifts.firebaseio.com/Exchanges/" + exchangeTitle + "/Enrolled Users/" + uid + "/Questions/Question5");
 
         mRef.addValueEventListener(new com.firebase.client.ValueEventListener() {
             @Override
@@ -329,7 +332,7 @@ public class PostDeadlineExchange extends AppCompatActivity implements View.OnCl
         mRef.addListenerForSingleValueEvent(new com.firebase.client.ValueEventListener() {
             @Override
             public void onDataChange(com.firebase.client.DataSnapshot dataSnapshot) {
-                quitExchange();
+                removeExchange();
                 Integer creditInt = dataSnapshot.getValue(Integer.class);
 
                 creditInt += 2;
@@ -348,7 +351,7 @@ public class PostDeadlineExchange extends AppCompatActivity implements View.OnCl
         });
     }
 
-    private void quitExchange() {
+    private void removeExchange() {
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference();

@@ -57,8 +57,7 @@ public class Tab4Profile extends Fragment implements View.OnClickListener{
     private Firebase mRef;
     private FirebaseAuth.AuthStateListener mAuthListener;
     private BottomNavigationView bottomNavigationView;
-    Button saveNameBtn, editNameBtn, saveAddressBtn, editAddressBtn, saveInterestBtn, editInterestBtn;
-
+    Button saveNameBtn, editNameBtn, saveAddressBtn, editAddressBtn, saveInterestBtn, editInterestBtn, logout;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -75,8 +74,8 @@ public class Tab4Profile extends Fragment implements View.OnClickListener{
 
 
         mAuth = FirebaseAuth.getInstance();
-        userImageBtn = (ImageButton) view.findViewById(R.id.userImage);
-        userImageBtn.setOnClickListener(this);
+        //userImageBtn = (ImageButton) view.findViewById(R.id.userImage);
+        //userImageBtn.setOnClickListener(this);
 
 
         firstName = (TextView) view.findViewById(R.id.profile_firstName);
@@ -103,6 +102,8 @@ public class Tab4Profile extends Fragment implements View.OnClickListener{
         saveInterestBtn.setOnClickListener(this); // calling onClick() method
         editInterestBtn = (Button) getView().findViewById(R.id.editInterests);
         editInterestBtn.setOnClickListener(this);
+        logout = (Button) getView().findViewById(R.id.logoutBtn);
+        logout.setOnClickListener(this);
 
         //Checks if the current user is signed in or not. Prevents bugs.
         mAuthListener = new FirebaseAuth.AuthStateListener() {
@@ -314,13 +315,14 @@ public class Tab4Profile extends Fragment implements View.OnClickListener{
     @Override
     public void onClick(View v1) {
         if (v1.getId() == R.id.userImage){
-            FirebaseDatabase database = FirebaseDatabase.getInstance();
+            /*FirebaseDatabase database = FirebaseDatabase.getInstance();
             DatabaseReference myRef = database.getReference();
 
             Intent galleryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
             startActivityForResult(galleryIntent, GET_PIC);
 
             myRef.child("Users").child(mAuth.getCurrentUser().getUid()).child("User Info").child("Photo").setValue(userImageBtn.getImageAlpha());
+        */
         }
         else if (v1.getId() == R.id.saveName)
         {
@@ -483,15 +485,23 @@ public class Tab4Profile extends Fragment implements View.OnClickListener{
             interestInput.setEnabled(true);
         }
 
+        else if (v1.getId() == R.id.logoutBtn){
+            Intent myIntent = new Intent(v1.getContext(), intro.class);
+            myIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivityForResult(myIntent, 0);
+
+        }
+
     }
+
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == GET_PIC && resultCode == Activity.RESULT_OK && data != null){
+        /*if (requestCode == GET_PIC && resultCode == Activity.RESULT_OK && data != null){
 
             userImageBtn.setImageBitmap(decodeSampledBitmapFromResource(getResources(), R.id.userImage, 100, 100));
-        }
+        }*/
     }
 
     public static Bitmap decodeSampledBitmapFromResource(Resources res, int resId, int reqWidth, int reqHeight) {
