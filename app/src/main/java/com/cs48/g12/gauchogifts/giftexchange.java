@@ -14,6 +14,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.HashMap;
 
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
@@ -24,6 +28,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.ChildEventListener;
+
+import java.util.List;
 
 
 public class giftexchange extends AppCompatActivity {
@@ -45,6 +51,7 @@ public class giftexchange extends AppCompatActivity {
     private TextView questionSix;
     private FirebaseAuth mAuth;
     private Firebase mRef;
+    public List<String> enrolledUsers;
     private FirebaseAuth.AuthStateListener mAuthListener;
 
     @Override
