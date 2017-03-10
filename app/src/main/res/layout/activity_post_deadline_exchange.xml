@@ -1,22 +1,331 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/post_deadline_exchange"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.cs48.g12.gauchogifts.PostDeadlineExchange">
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    >
 
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Button"
-        android:layout_marginLeft="8dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginRight="8dp"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="8dp" />
-</android.support.constraint.ConstraintLayout>
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        tools:layout_editor_absoluteY="8dp"
+        tools:layout_editor_absoluteX="8dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
+
+        <LinearLayout
+
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:weightSum="1"
+            android:paddingBottom="25dp">
+
+
+            <Button
+                android:id="@+id/backBtn"
+                android:layout_width="66dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.03"
+                android:text="Back"
+                android:textAlignment="center" />
+
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Your Giftee Profile"
+                android:textAlignment="center"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                android:paddingBottom="50dp"/>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <android.support.constraint.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.44">
+
+                    <TextView
+                        android:id="@+id/profile_firstName"
+                        android:layout_width="178dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="-19dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_weight="0.44"
+                        android:ems="10"
+                        android:hint="First Name"
+                        android:inputType="textPersonName"
+                        android:textSize="20sp"
+                        app:layout_constraintRight_toRightOf="@+id/userImage"
+                        />
+
+
+                </android.support.constraint.ConstraintLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/lastName"
+                    android:layout_width="284dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginTop="8dp"
+                    android:ems="10"
+                    android:hint="Last Name"
+                    android:inputType="textPersonName"
+                    android:textSize="20sp"
+                    app:layout_constraintLeft_toLeftOf="@+id/userImage"
+                    app:layout_constraintTop_toBottomOf="@+id/profile_firstName" />
+
+            </LinearLayout>
+
+
+
+                <android.support.constraint.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/address"
+                        android:layout_width="250dp"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:inputType="text"
+                        android:text="Address:"
+                        android:textSize="20dp"
+                        android:textStyle="bold" />
+
+                </android.support.constraint.ConstraintLayout>
+
+
+
+            <TextView
+                android:id="@+id/street1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="50dp"
+                android:ems="10"
+                android:hint="Street"
+                android:inputType="textPostalAddress"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/street2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="50dp"
+                android:ems="10"
+                android:hint="Street"
+                android:inputType="textPostalAddress"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/City"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="50dp"
+                android:ems="10"
+                android:hint="City"
+                android:inputType="textPostalAddress"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/State"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="50dp"
+                android:ems="10"
+                android:hint="State"
+                android:inputType="textPostalAddress"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/Zip"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="50dp"
+                android:ems="10"
+                android:hint="Zip"
+                android:inputType="textPostalAddress"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/country"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="50dp"
+                android:ems="10"
+                android:hint="Country"
+                android:inputType="textPostalAddress"
+                android:textSize="18sp" />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <android.support.constraint.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1.17">
+
+                    <TextView
+                        android:id="@+id/interests"
+                        android:layout_width="214dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.17"
+                        android:text="Interests:"
+                        android:textSize="20dp"
+                        android:paddingBottom="10dp"
+                        android:textStyle="bold" />
+
+                </android.support.constraint.ConstraintLayout>
+
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:id="@+id/interestInput"
+                android:gravity="top|left"
+                android:paddingBottom="50dp"
+                android:textSize="18dp"
+                android:enabled="false"
+                />
+
+            <TextView
+                android:id="@+id/titleJ"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="20dp"
+                android:paddingTop="20dp"
+                android:text="Survey"
+                android:textAlignment="center"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/question1J"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Notes for your gifter"
+                android:textAlignment="center" />
+
+            <TextView
+                android:id="@+id/q1AnsJ"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Answer:"
+                android:inputType="textMultiLine"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/question2J"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Question 2"
+                android:textAlignment="center" />
+
+            <TextView
+                android:id="@+id/q2AnsJ"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Answer:"
+                android:inputType="textMultiLine"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/question3J"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Question 3"
+                android:textAlignment="center" />
+
+            <TextView
+                android:id="@+id/q3AnsJ"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Answer:"
+                android:inputType="textMultiLine"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/question4J"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Question 4"
+                android:textAlignment="center" />
+
+            <TextView
+                android:id="@+id/q4AnsJ"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Answer:"
+                android:inputType="textMultiLine"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/question5J"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Question 5"
+                android:textAlignment="center" />
+
+            <TextView
+                android:id="@+id/q5AnsJ"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Answer:"
+                android:inputType="textMultiLine"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/question6J"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Question 6"
+                android:textAlignment="center" />
+
+            <TextView
+                android:id="@+id/q6AnsJ"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Answer:"
+                android:inputType="textMultiLine"
+                android:textSize="14sp"
+                />
+
+            <Button
+                android:id="@+id/exchangeComplete"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Exchange Completed" />
+
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>

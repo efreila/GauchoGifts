@@ -90,12 +90,6 @@ public class Tab4Profile extends Fragment implements View.OnClickListener{
         interestInput = (EditText) view.findViewById(R.id.interestInput);
         interestInput.setEnabled(false);
         Country = (TextView) view.findViewById(R.id.country);
-        saveNameBtn = (Button) view.findViewById(R.id.saveName);
-        editNameBtn = (Button) view.findViewById(R.id.editName);
-        saveAddressBtn = (Button) view.findViewById(R.id.saveAddress);
-        editAddressBtn = (Button) view.findViewById(R.id.editAddress);
-        saveInterestBtn = (Button) view.findViewById(R.id.saveInterests);
-        editInterestBtn = (Button) view.findViewById(R.id.editInterests);
 
         saveNameBtn = (Button) getView().findViewById(R.id.saveName);
         saveNameBtn.setOnClickListener(this); // calling onClick() method
