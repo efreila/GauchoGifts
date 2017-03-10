@@ -1,6 +1,8 @@
 package com.cs48.g12.gauchogifts;
 
 import android.content.Intent;
+import android.icu.text.SimpleDateFormat;
+import android.icu.util.Calendar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -15,6 +17,9 @@ import com.firebase.client.FirebaseError;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import java.text.ParseException;
+import java.util.Date;
 
 public class joinedexchange extends AppCompatActivity {
 
@@ -53,7 +58,6 @@ public class joinedexchange extends AppCompatActivity {
         questionFour = (TextView)findViewById(R.id.question4J);
         questionFive = (TextView)findViewById(R.id.question5J);
         questionSix = (TextView)findViewById(R.id.question6J);
-
 
         Bundle geinfo = getIntent().getExtras();
         String exchangeTitle = geinfo.getString("Title");

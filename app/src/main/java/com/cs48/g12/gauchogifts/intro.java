@@ -41,8 +41,6 @@ public class intro extends AppCompatActivity {
                 startActivityForResult(myIntent1, 0);
             }
         });
-
-        Toast.makeText(intro.this, "", Toast.LENGTH_SHORT).show();
     }
     protected void sendMessage(View v)
     {
