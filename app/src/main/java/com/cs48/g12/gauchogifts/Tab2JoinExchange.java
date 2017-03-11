@@ -2,6 +2,7 @@ package com.cs48.g12.gauchogifts;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.icu.util.Calendar;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -11,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.icu.text.SimpleDateFormat;
 
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
@@ -28,6 +30,8 @@ public class Tab2JoinExchange extends Fragment {
 
     private ListView joinexchanges;
     private FirebaseAuth mAuth;
+    private Calendar c;
+    private String exDeadlineTime;
 
 
     @Override
@@ -206,6 +210,7 @@ public class Tab2JoinExchange extends Fragment {
                     public void onClick(View view) {
                         //Passes the information retrieved from the URL above to the next activity. This is needed to display the correct information
                         //based on the exchange chosen.
+
                         Firebase geTitle = new Firebase("https://gauchogifts.firebaseio.com/Exchanges/" + gemodel + "/Title");
                         Firebase geDeadline = new Firebase("https://gauchogifts.firebaseio.com/Exchanges/" + gemodel + "/Deadline");
                         Firebase geDescription = new Firebase("https://gauchogifts.firebaseio.com/Exchanges/" + gemodel + "/Description");

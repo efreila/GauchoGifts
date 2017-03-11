@@ -26,7 +26,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class PostDeadlineExchange extends AppCompatActivity implements View.OnClickListener {
 
-    Button complete, goBack;
+    Button complete;
     TextView firstName, lastName, street1, street2, City, State, Zip, Credits, Country, interestInput, q1Ans, q2Ans, q3Ans, q4Ans, q5Ans, q6Ans;
     TextView q1text, q2text, q3text, q4text, q5text, q6text;
     private TextView saveText;
@@ -64,8 +64,6 @@ public class PostDeadlineExchange extends AppCompatActivity implements View.OnCl
         q5text = (TextView) findViewById(R.id.question5J);
         q6text = (TextView) findViewById(R.id.question6J);
 
-        goBack = (Button) findViewById(R.id.backBtn);
-        goBack.setOnClickListener(this);
         complete = (Button) findViewById(R.id.exchangeComplete);
         complete.setOnClickListener(this); // calling onClick() method
 
@@ -225,96 +223,20 @@ public class PostDeadlineExchange extends AppCompatActivity implements View.OnCl
             }
         });
 
-        //Loads question 1.
-        mRef = new Firebase("https://gauchogifts.firebaseio.com/Exchanges/" + exchangeTitle + "/Questions/Question1");
-        mRef.addValueEventListener(new com.firebase.client.ValueEventListener() {
-            @Override
-            public void onDataChange(com.firebase.client.DataSnapshot dataSnapshot) {
-                String question1 = dataSnapshot.getValue(String.class);
+        String exQuestionOne = geinfo.getString("QuestionOne");
+        q1text.setText(exQuestionOne);
 
-                q1text.setText(question1);
-            }
+        String exQuestionTwo = geinfo.getString("QuestionTwo");
+        q2text.setText(exQuestionTwo);
 
-            @Override
-            public void onCancelled(FirebaseError firebaseError) {
+        String exQuestionThree = geinfo.getString("QuestionThree");
+        q3text.setText(exQuestionThree);
 
-            }
-        });
+        String exQuestionFour = geinfo.getString("QuestionFour");
+        q4text.setText(exQuestionFour);
 
-        mRef = new Firebase("https://gauchogifts.firebaseio.com/Exchanges/" + exchangeTitle + "/Questions/Question2");
-        mRef.addValueEventListener(new com.firebase.client.ValueEventListener() {
-            @Override
-            public void onDataChange(com.firebase.client.DataSnapshot dataSnapshot) {
-                String question2 = dataSnapshot.getValue(String.class);
-
-                q2text.setText(question2);
-            }
-
-            @Override
-            public void onCancelled(FirebaseError firebaseError) {
-
-            }
-        });
-
-        mRef = new Firebase("https://gauchogifts.firebaseio.com/Exchanges/" + exchangeTitle + "/Questions/Question3");
-        mRef.addValueEventListener(new com.firebase.client.ValueEventListener() {
-            @Override
-            public void onDataChange(com.firebase.client.DataSnapshot dataSnapshot) {
-                String question3 = dataSnapshot.getValue(String.class);
-
-                q3text.setText(question3);
-            }
-
-            @Override
-            public void onCancelled(FirebaseError firebaseError) {
-
-            }
-        });
-
-        mRef = new Firebase("https://gauchogifts.firebaseio.com/Exchanges/" + exchangeTitle + "/Questions/Question4");
-        mRef.addValueEventListener(new com.firebase.client.ValueEventListener() {
-            @Override
-            public void onDataChange(com.firebase.client.DataSnapshot dataSnapshot) {
-                String question4 = dataSnapshot.getValue(String.class);
-
-                q4text.setText(question4);
-            }
-
-            @Override
-            public void onCancelled(FirebaseError firebaseError) {
-
-            }
-        });
-
-        mRef = new Firebase("https://gauchogifts.firebaseio.com/Exchanges/" + exchangeTitle + "/Questions/Question5");
-        mRef.addValueEventListener(new com.firebase.client.ValueEventListener() {
-            @Override
-            public void onDataChange(com.firebase.client.DataSnapshot dataSnapshot) {
-                String question5 = dataSnapshot.getValue(String.class);
-
-                q5text.setText(question5);
-            }
-
-            @Override
-            public void onCancelled(FirebaseError firebaseError) {
-
-            }
-        });
-
-        mRef = new Firebase("https://gauchogifts.firebaseio.com/Exchanges/" + exchangeTitle + "/Questions/Question6");
-        mRef.addValueEventListener(new com.firebase.client.ValueEventListener() {
-            @Override
-            public void onDataChange(com.firebase.client.DataSnapshot dataSnapshot) {
-                String question6 = dataSnapshot.getValue(String.class);
-
-                q6text.setText(question6);
-            }
-
-            @Override
-            public void onCancelled(FirebaseError firebaseError) {
-
-            }
-        });
+        String exQuestionFive = geinfo.getString("QuestionFive");
+        q5text.setText(exQuestionFive);
 
 
         //Loads giftee answer to question 1.
@@ -424,11 +346,6 @@ public class PostDeadlineExchange extends AppCompatActivity implements View.OnCl
             Intent myIntent = new Intent(v.getContext(), navheader.class);
             startActivityForResult(myIntent, 0);
         }
-        else if (v.getId() == R.id.backBtn)
-        {
-            Intent myIntent = new Intent(v.getContext(), navheader.class);
-            startActivityForResult(myIntent, 0);
-        }
     }
 
     private void changeCredit() {
@@ -470,6 +387,13 @@ public class PostDeadlineExchange extends AppCompatActivity implements View.OnCl
         Intent myIntent = new Intent(PostDeadlineExchange.this, navheader.class);
         startActivity(myIntent);
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent myIntent = new Intent(PostDeadlineExchange.this, navheader.class);
+        startActivity(myIntent);
     }
 
 

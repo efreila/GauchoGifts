@@ -28,14 +28,6 @@
             android:paddingBottom="25dp">
 
 
-            <Button
-                android:id="@+id/backBtn"
-                android:layout_width="66dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.03"
-                android:text="Back"
-                android:textAlignment="center" />
-
 
             <TextView
                 android:id="@+id/title"
