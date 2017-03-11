@@ -1,10 +1,13 @@
 package com.cs48.g12.gauchogifts;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.icu.text.SimpleDateFormat;
 import android.icu.util.Calendar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.ButtonBarLayout;
+import android.text.InputType;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -38,26 +41,88 @@ public class joinedexchange extends AppCompatActivity {
     private TextView questionFive;
     private TextView questionSix;
     private Firebase mRef;
+    private FirebaseAuth mAuth;
+    private Button saveBtn, editBtn;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_joinedexchange);
 
+        mAuth = FirebaseAuth.getInstance();
         acTitle = (TextView)findViewById(R.id.geTitleJ);
         acDeadline = (TextView)findViewById(R.id.geDeadlineJ);
         acDescription = (TextView)findViewById(R.id.geDescriptonJ);
         questionOneAnswer = (EditText)findViewById(R.id.q1AnsJ);
+        questionOneAnswer.setEnabled(false);
         questionTwoAnswer = (EditText)findViewById(R.id.q2AnsJ);
+        questionTwoAnswer.setEnabled(false);
         questionThreeAnswer = (EditText)findViewById(R.id.q3AnsJ);
+        questionThreeAnswer.setEnabled(false);
         questionFourAnswer = (EditText)findViewById(R.id.q4AnsJ);
+        questionFourAnswer.setEnabled(false);
         questionFiveAnswer = (EditText)findViewById(R.id.q5AnsJ);
+        questionFiveAnswer.setEnabled(false);
         questionSixAnswer = (EditText)findViewById(R.id.q6AnsJ);
+        questionSixAnswer.setEnabled(false);
         questionTwo = (TextView)findViewById(R.id.question2J);
         questionThree = (TextView)findViewById(R.id.question3J);
         questionFour = (TextView)findViewById(R.id.question4J);
         questionFive = (TextView)findViewById(R.id.question5J);
         questionSix = (TextView)findViewById(R.id.question6J);
+
+        Button quit = (Button)findViewById(R.id.quitBtn);
+        //if before deadline
+        quit.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                quitExchange();
+            }
+        });
+
+        Button save = (Button)findViewById(R.id.saveBtn);
+        save.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                FirebaseDatabase database = FirebaseDatabase.getInstance();
+                DatabaseReference myRef = database.getReference();
+                Bundle geinfo = getIntent().getExtras();
+                String exchangeTitle = geinfo.getString("Title");
+
+                myRef.child("Exchanges").child(exchangeTitle).child("Enrolled Users").child(mAuth.getCurrentUser().getUid()).child("Questions").child("General Info").setValue(questionOneAnswer.getText().toString().trim());
+                myRef.child("Exchanges").child(exchangeTitle).child("Enrolled Users").child(mAuth.getCurrentUser().getUid()).child("Questions").child("General Info").setValue(questionTwoAnswer.getText().toString().trim());
+                myRef.child("Exchanges").child(exchangeTitle).child("Enrolled Users").child(mAuth.getCurrentUser().getUid()).child("Questions").child("General Info").setValue(questionThreeAnswer.getText().toString().trim());
+                myRef.child("Exchanges").child(exchangeTitle).child("Enrolled Users").child(mAuth.getCurrentUser().getUid()).child("Questions").child("General Info").setValue(questionFourAnswer.getText().toString().trim());
+                myRef.child("Exchanges").child(exchangeTitle).child("Enrolled Users").child(mAuth.getCurrentUser().getUid()).child("Questions").child("General Info").setValue(questionFiveAnswer.getText().toString().trim());
+                myRef.child("Exchanges").child(exchangeTitle).child("Enrolled Users").child(mAuth.getCurrentUser().getUid()).child("Questions").child("General Info").setValue(questionSixAnswer.getText().toString().trim());
+
+                questionOneAnswer.setEnabled(false);
+                questionTwoAnswer.setEnabled(false);
+                questionThreeAnswer.setEnabled(false);
+                questionFourAnswer.setEnabled(false);
+                questionFiveAnswer.setEnabled(false);
+                questionSixAnswer.setEnabled(false);
+
+
+
+            }
+        });
+
+        Button edit = (Button)findViewById(R.id.editBtn);
+        edit.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                //saveBtn.setVisibility(view.VISIBLE);
+                //editBtn.setVisibility(view.INVISIBLE);
+
+                questionOneAnswer.setEnabled(true);
+                questionTwoAnswer.setEnabled(true);
+                questionThreeAnswer.setEnabled(true);
+                questionFourAnswer.setEnabled(true);
+                questionFiveAnswer.setEnabled(true);
+                questionSixAnswer.setEnabled(true);
+            }
+        });
+
+
 
         Bundle geinfo = getIntent().getExtras();
         String exchangeTitle = geinfo.getString("Title");
@@ -184,17 +249,14 @@ public class joinedexchange extends AppCompatActivity {
             }
         });
 
-        Button quit = (Button)findViewById(R.id.quitBtn);
-        //if before deadline
-        quit.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-                quitExchange();
-            }
-        });
+
+
 
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
     }
+
+
 
     private void quitExchange() {
         FirebaseDatabase database = FirebaseDatabase.getInstance();

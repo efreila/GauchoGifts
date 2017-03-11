@@ -1,6 +1,8 @@
 package com.cs48.g12.gauchogifts;
 
 import android.content.Intent;
+import android.icu.text.SimpleDateFormat;
+import android.icu.util.Calendar;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.widget.TextViewCompat;
@@ -14,6 +16,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.text.ParseException;
+import java.util.Date;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Map;
@@ -58,6 +63,7 @@ public class giftexchange extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_giftexchange);
+
 
         acTitle = (TextView)findViewById(R.id.geTitle);
         acDeadline = (TextView)findViewById(R.id.geDeadline);
@@ -106,7 +112,7 @@ public class giftexchange extends AppCompatActivity {
         join.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 checkFields();
-                changeCredit();
+
             }
         });
         //else (after deadline)
@@ -141,14 +147,12 @@ public class giftexchange extends AppCompatActivity {
             public void onDataChange(com.firebase.client.DataSnapshot dataSnapshot) {
                 Integer creditInt = dataSnapshot.getValue(Integer.class);
 
-
                 if(creditInt != 0){
-                    joinGiftExchange();
-
                     creditInt -= 1;
                     FirebaseDatabase database = FirebaseDatabase.getInstance();
                     DatabaseReference myRef = database.getReference();
                     myRef.child("Users").child(mAuth.getCurrentUser().getUid()).child("User Info").child("Credits").setValue(creditInt);
+                    joinGiftExchange();
                 }
 
                 else{
@@ -210,6 +214,7 @@ public class giftexchange extends AppCompatActivity {
 //    }
 
     private void joinGiftExchange() {
+
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference();
