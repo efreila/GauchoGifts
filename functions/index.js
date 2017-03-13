@@ -9,38 +9,44 @@ exports.randomizeUsers = functions.https.onRequest((req, res) => {
   var exRef = db.ref("Exchanges/" + original + "/Enrolled Users");
 
 
-  var count = 0;
-
-  exRef.on("child_added", function(snap) {
-    count++;
-  });
-
-  var userIDArr = new Array(4);
+//  var count = 0;
+//
+//  exRef.on("child_added", function(snap) {
+//    count++;
+//  });
+//
+//  var userIDArr = new Array(4);
 
   var i = 0;
   var j = 0;
   var k = 0;
   exRef.once("value", function(snapshot) {
+     var count = 0;
+
+     exRef.on("child_added", function(snap) {
+       count++;
+     });
+
+     var userIDArr = new Array(count);
    snapshot.forEach(function(data) {
-        if(i+((userIDArr.length)/3) > userIDArr.length - 1)
+        if((i + Math.floor(count/3)) > count - 1)
         {
-            j = i + ((userIDArr.length)/3) - userIDArr.length;
+            j = i + (Math.floor(count/3) - count);
         }
         else
         {
-            j = i + (userIDArr.length)/3;
+            j = i + Math.floor(count/3);
         }
         userIDArr[j] = data.key;
         i++;
    });
    snapshot.forEach(function(data) {
-           matchedid = userIDArr[k];
+           var matchedid = userIDArr[k];
 
            var matchedUserRef = db.ref("Exchanges/" + original + "/Enrolled Users/");
            matchedUserRef.child(data.key).update({
                    Giftee: matchedid
            });
-
            k++;
    });
   },
