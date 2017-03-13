@@ -5,25 +5,54 @@ var db = admin.database();
 
 exports.randomizeUsers = functions.https.onRequest((req, res) => {
   // Grab the text parameter, which is the gift exchange title
-  const original = req.query.text;
+  const original = req.query.text
   var exRef = db.ref("Exchanges/" + original + "/Enrolled Users");
 
-  var count = 0;
-  var userIDArr = [];
 
-  exRef.on("child_added", function(snap) {
-    count++;
-  });
+//  var count = 0;
+//
+//  exRef.on("child_added", function(snap) {
+//    count++;
+//  });
+//
+//  var userIDArr = new Array(4);
 
+  var i = 0;
+  var j = 0;
+  var k = 0;
   exRef.once("value", function(snapshot) {
-   snapshot.forEach(function(data) {
-        userIDArr.push(data.key);
-   });
-  }, function (errorObject) {
-    console.log("The read failed: " + errorObject.code);
-  });
+     var count = 0;
 
-  console.log(userIDArr);
+     exRef.on("child_added", function(snap) {
+       count++;
+     });
+
+     var userIDArr = new Array(count);
+   snapshot.forEach(function(data) {
+        if((i + Math.floor(count/3)) > count - 1)
+        {
+            j = i + (Math.floor(count/3) - count);
+        }
+        else
+        {
+            j = i + Math.floor(count/3);
+        }
+        userIDArr[j] = data.key;
+        i++;
+   });
+   snapshot.forEach(function(data) {
+           var matchedid = userIDArr[k];
+
+           var matchedUserRef = db.ref("Exchanges/" + original + "/Enrolled Users/");
+           matchedUserRef.child(data.key).update({
+                   Giftee: matchedid
+           });
+           k++;
+   });
+  },
+  function (errorObject) {
+      console.log("The read failed: " + errorObject.code);
+    });
 
 
 
@@ -33,18 +62,3 @@ exports.randomizeUsers = functions.https.onRequest((req, res) => {
     res.redirect(303, snapshot.ref);
   });
 });
-
-//// Listens for new messages added to /messages/:pushId/original and creates an
-//// uppercase version of the message to /messages/:pushId/uppercase
-//exports.makeUppercase = functions.database.ref('/messages/{pushId}/original').onWrite(event => {
-//      // Grab the current value of what was written to the Realtime Database.
-//      const original = event.data.val();
-//      console.log('Uppercasing', event.params.pushId, original);
-//      const uppercase = original.toUpperCase();
-//      // You must return a Promise when performing asynchronous tasks inside a Functions such as
-//      // writing to the Firebase Realtime Database.
-//      // Setting an "uppercase" sibling in the Realtime Database returns a Promise.
-//      return event.data.ref.parent.child('uppercase').set(uppercase);
-//    });
-
-
