@@ -314,17 +314,7 @@ public class Tab4Profile extends Fragment implements View.OnClickListener{
 
     @Override
     public void onClick(View v1) {
-        if (v1.getId() == R.id.userImage){
-            /*FirebaseDatabase database = FirebaseDatabase.getInstance();
-            DatabaseReference myRef = database.getReference();
-
-            Intent galleryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
-            startActivityForResult(galleryIntent, GET_PIC);
-
-            myRef.child("Users").child(mAuth.getCurrentUser().getUid()).child("User Info").child("Photo").setValue(userImageBtn.getImageAlpha());
-        */
-        }
-        else if (v1.getId() == R.id.saveName)
+        if (v1.getId() == R.id.saveName)
         {
             InputMethodManager inputManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
             inputManager.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
