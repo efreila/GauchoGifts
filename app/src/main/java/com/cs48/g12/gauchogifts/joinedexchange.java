@@ -80,6 +80,7 @@ public class joinedexchange extends AppCompatActivity {
             }
         });
 
+        //when save button is clicked
         Button save = (Button)findViewById(R.id.saveBtn);
         save.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
@@ -89,11 +90,11 @@ public class joinedexchange extends AppCompatActivity {
                 String exchangeTitle = geinfo.getString("Title");
 
                 myRef.child("Exchanges").child(exchangeTitle).child("Enrolled Users").child(mAuth.getCurrentUser().getUid()).child("Questions").child("General Info").setValue(questionOneAnswer.getText().toString().trim());
-                myRef.child("Exchanges").child(exchangeTitle).child("Enrolled Users").child(mAuth.getCurrentUser().getUid()).child("Questions").child("General Info").setValue(questionTwoAnswer.getText().toString().trim());
-                myRef.child("Exchanges").child(exchangeTitle).child("Enrolled Users").child(mAuth.getCurrentUser().getUid()).child("Questions").child("General Info").setValue(questionThreeAnswer.getText().toString().trim());
-                myRef.child("Exchanges").child(exchangeTitle).child("Enrolled Users").child(mAuth.getCurrentUser().getUid()).child("Questions").child("General Info").setValue(questionFourAnswer.getText().toString().trim());
-                myRef.child("Exchanges").child(exchangeTitle).child("Enrolled Users").child(mAuth.getCurrentUser().getUid()).child("Questions").child("General Info").setValue(questionFiveAnswer.getText().toString().trim());
-                myRef.child("Exchanges").child(exchangeTitle).child("Enrolled Users").child(mAuth.getCurrentUser().getUid()).child("Questions").child("General Info").setValue(questionSixAnswer.getText().toString().trim());
+                myRef.child("Exchanges").child(exchangeTitle).child("Enrolled Users").child(mAuth.getCurrentUser().getUid()).child("Questions").child("Question1").setValue(questionTwoAnswer.getText().toString().trim());
+                myRef.child("Exchanges").child(exchangeTitle).child("Enrolled Users").child(mAuth.getCurrentUser().getUid()).child("Questions").child("Question2").setValue(questionThreeAnswer.getText().toString().trim());
+                myRef.child("Exchanges").child(exchangeTitle).child("Enrolled Users").child(mAuth.getCurrentUser().getUid()).child("Questions").child("Question3").setValue(questionFourAnswer.getText().toString().trim());
+                myRef.child("Exchanges").child(exchangeTitle).child("Enrolled Users").child(mAuth.getCurrentUser().getUid()).child("Questions").child("Question4").setValue(questionFiveAnswer.getText().toString().trim());
+                myRef.child("Exchanges").child(exchangeTitle).child("Enrolled Users").child(mAuth.getCurrentUser().getUid()).child("Questions").child("Question5").setValue(questionSixAnswer.getText().toString().trim());
 
                 questionOneAnswer.setEnabled(false);
                 questionTwoAnswer.setEnabled(false);
@@ -107,6 +108,7 @@ public class joinedexchange extends AppCompatActivity {
             }
         });
 
+        //when edit button is clicked
         Button edit = (Button)findViewById(R.id.editBtn);
         edit.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
@@ -153,6 +155,7 @@ public class joinedexchange extends AppCompatActivity {
         String exQuestionFive = geinfo.getString("QuestionFive");
         questionSix.setText(exQuestionFive);
 
+        //loads general info
         mRef = new Firebase("https://gauchogifts.firebaseio.com/Exchanges/" + exchangeTitle +  "/Enrolled Users/" + uid + "/Questions/General Info");
 
         mRef.addValueEventListener(new com.firebase.client.ValueEventListener() {
@@ -169,6 +172,7 @@ public class joinedexchange extends AppCompatActivity {
             }
         });
 
+        //loads answer to question 1
         mRef = new Firebase("https://gauchogifts.firebaseio.com/Exchanges/" + exchangeTitle +  "/Enrolled Users/" + uid + "/Questions/Question1");
 
         mRef.addValueEventListener(new com.firebase.client.ValueEventListener() {
@@ -185,6 +189,7 @@ public class joinedexchange extends AppCompatActivity {
             }
         });
 
+        //loads answer to question 2
         mRef = new Firebase("https://gauchogifts.firebaseio.com/Exchanges/" + exchangeTitle +  "/Enrolled Users/" + uid + "/Questions/Question2");
 
         mRef.addValueEventListener(new com.firebase.client.ValueEventListener() {
@@ -201,6 +206,7 @@ public class joinedexchange extends AppCompatActivity {
             }
         });
 
+        //loads answer to question 1
         mRef = new Firebase("https://gauchogifts.firebaseio.com/Exchanges/" + exchangeTitle +  "/Enrolled Users/" + uid + "/Questions/Question3");
 
         mRef.addValueEventListener(new com.firebase.client.ValueEventListener() {
@@ -217,6 +223,7 @@ public class joinedexchange extends AppCompatActivity {
             }
         });
 
+        //loads answer to question 4
         mRef = new Firebase("https://gauchogifts.firebaseio.com/Exchanges/" + exchangeTitle +  "/Enrolled Users/" + uid + "/Questions/Question4");
 
         mRef.addValueEventListener(new com.firebase.client.ValueEventListener() {
@@ -233,6 +240,7 @@ public class joinedexchange extends AppCompatActivity {
             }
         });
 
+        //loads answer to question 5
         mRef = new Firebase("https://gauchogifts.firebaseio.com/Exchanges/" + exchangeTitle +  "/Enrolled Users/" + uid + "/Questions/Question5");
 
         mRef.addValueEventListener(new com.firebase.client.ValueEventListener() {
@@ -257,7 +265,7 @@ public class joinedexchange extends AppCompatActivity {
     }
 
 
-
+    //removes exchange from your exchanges
     private void quitExchange() {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference();
@@ -273,6 +281,7 @@ public class joinedexchange extends AppCompatActivity {
 
     }
 
+    //when back button pressed returns to navheader
     @Override
     public void onBackPressed() {
         super.onBackPressed();

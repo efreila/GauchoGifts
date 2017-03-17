@@ -54,6 +54,7 @@ public class Tab1YourExchanges extends Fragment {
         FirebaseListAdapter<String> firebaseListAdapter = new FirebaseListAdapter<String>(
                 getActivity(), String.class, android.R.layout.simple_list_item_1, databaseReference) {
             @Override
+            //Populates the list view with the user's currently enrolled gift exchanges
             protected void populateView(View v, String model, int position) {
                 final String gemodel = model;
                 final Intent myIntent = new Intent(getActivity(), joinedexchange.class);
@@ -69,6 +70,7 @@ public class Tab1YourExchanges extends Fragment {
                 final Firebase geQuestionFive = new Firebase("https://gauchogifts.firebaseio.com/Exchanges/" + gemodel + "/Questions/Question4");
                 final Firebase geQuestionSix = new Firebase("https://gauchogifts.firebaseio.com/Exchanges/" + gemodel + "/Questions/Question5");
 
+                //Retrieves deadline of gift exchange from database
                 DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
                 rootRef.child("Exchanges").child(gemodel).addValueEventListener(new ValueEventListener() {
                     @Override
@@ -83,11 +85,13 @@ public class Tab1YourExchanges extends Fragment {
                     }
                 });
 
+                //Stores information in a bundle retrieved in a later activity
                 TextView textView = (TextView) v.findViewById(android.R.id.text1);
                 textView.setText(model);
                 textView.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View view) {
                         try {
+                            //Checks if current date has passed the deadline of the gift exchange
                             SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy");
                             String formattedDate = df.format(c.getTime());
                             Date currentDate = df.parse(formattedDate);

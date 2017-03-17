@@ -72,19 +72,14 @@ public class PostDeadlineExchange extends AppCompatActivity implements View.OnCl
         edit = (Button) findViewById(R.id.editBtn);
         edit.setOnClickListener(this);
 
-        //Loads the giftee's first name.
-
-
-
         Bundle geinfo = getIntent().getExtras();
         String exchangeTitle = geinfo.getString("Title");
         String currentUid = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
         gifteeUid = new Firebase("https://gauchogifts.firebaseio.com/Exchanges/" + exchangeTitle + "/Enrolled Users/" + currentUid + "/Giftee");
 
-
+        //Loads the giftee's first name
         mRef = new Firebase("https://gauchogifts.firebaseio.com/Users/" + gifteeUid + "/User Info/First Name");
-
         mRef.addValueEventListener(new com.firebase.client.ValueEventListener() {
             @Override
             public void onDataChange(com.firebase.client.DataSnapshot dataSnapshot) {
@@ -229,6 +224,7 @@ public class PostDeadlineExchange extends AppCompatActivity implements View.OnCl
             }
         });
 
+        //Loads all the gift exchange survey questions
         String exQuestionOne = geinfo.getString("QuestionOne");
         q2text.setText(exQuestionOne);
 
@@ -350,36 +346,15 @@ public class PostDeadlineExchange extends AppCompatActivity implements View.OnCl
         Bundle geinfo = getIntent().getExtras();
         String exchangeTitle = geinfo.getString("Title");
 
+        //Changes users credits once "Exchange Complete" button is pressed
         if (v.getId() == R.id.exchangeComplete) {
             changeCredit();
             Intent myIntent = new Intent(v.getContext(), navheader.class);
             startActivityForResult(myIntent, 0);
         }
-        else if (v.getId() == R.id.saveBtn){
-            FirebaseDatabase database = FirebaseDatabase.getInstance();
-            DatabaseReference myRef = database.getReference();
-
-            myRef.child("Exchanges").child(exchangeTitle).child("Enrolled Users").child(mAuth.getCurrentUser().getUid()).child("Questions").child("General Info").setValue(q1Ans.getText().toString().trim());
-            myRef.child("Exchanges").child(exchangeTitle).child("Enrolled Users").child(mAuth.getCurrentUser().getUid()).child("Questions").child("Question1").setValue(q2Ans.getText().toString().trim());
-            myRef.child("Exchanges").child(exchangeTitle).child("Enrolled Users").child(mAuth.getCurrentUser().getUid()).child("Questions").child("Question1").setValue(q3Ans.getText().toString().trim());
-            myRef.child("Exchanges").child(exchangeTitle).child("Enrolled Users").child(mAuth.getCurrentUser().getUid()).child("Questions").child("Question1").setValue(q4Ans.getText().toString().trim());
-            myRef.child("Exchanges").child(exchangeTitle).child("Enrolled Users").child(mAuth.getCurrentUser().getUid()).child("Questions").child("Question1").setValue(q5Ans.getText().toString().trim());
-            myRef.child("Exchanges").child(exchangeTitle).child("Enrolled Users").child(mAuth.getCurrentUser().getUid()).child("Questions").child("Question1").setValue(q6Ans.getText().toString().trim());
-
-            interestInput.setEnabled(false);
-        }
-
-        else if(v.getId() == R.id.editBtn){
-            q1Ans.setEnabled(true);
-            q2Ans.setEnabled(true);
-            q3Ans.setEnabled(true);
-            q4Ans.setEnabled(true);
-            q6Ans.setEnabled(true);
-            q5Ans.setEnabled(true);
-
-        }
     }
 
+    //Gives user 2 credits once they have completed a gift exchange
     private void changeCredit() {
         String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
         mRef = new Firebase("https://gauchogifts.firebaseio.com/Users/" + uid + "/User Info/Credits");
@@ -406,6 +381,8 @@ public class PostDeadlineExchange extends AppCompatActivity implements View.OnCl
         });
     }
 
+
+    //Once exchange is completed, it removes it from user's current exchanges list
     private void removeExchange() {
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -421,6 +398,7 @@ public class PostDeadlineExchange extends AppCompatActivity implements View.OnCl
 
     }
 
+    //Makes the back button go to the home screen
     @Override
     public void onBackPressed() {
         super.onBackPressed();
